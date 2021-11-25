@@ -1,43 +1,34 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-// import p5Types from 'p5'
-import dynamic from 'next/dynamic'
-import getConfig from 'next/config';
+import getConfig from 'next/config'
 import Link from 'next/link'
-import { ReactChild, ReactFragment, ReactPortal } from 'react';
-
-const ReactP5 = dynamic(() => import('react-p5'), {
-  loading: () => <></>,
-  ssr: false,
-})
 
 const Home: NextPage = () => {
-  const { publicRuntimeConfig: { sketchFileNames } } = getConfig();
+  const { publicRuntimeConfig: { sketchFileNames } } = getConfig()
   return (
     <>
       <Head>
-        <title>creative-coding | tic40</title>
-        <meta name="description" content="creative-coding | tic40" />
+        <title>tic40/creative-coding</title>
+        <meta name="description" content="tic40/creative-coding" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h2>Sketches</h2>
-      <main>
-        {(sketchFileNames.map((name: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined) => {
-          const sketch = require(`../sketches/${name}`);
+      <main className="m-4">
+        <h1 className="text-4xl">tic40/creative-coding</h1>
+        <ul className="my-4">
+        {(sketchFileNames.map((name: string) => {
+          const sketch = require(`../sketches/${name}`)
           return (
-            <div key={`sketch-${name}`} className="sketch-container">
+            <li key={`sketch-${name}`} className="underline text-xl">
               <Link href={`/sketches/${name}`}>
                 <a> {name} </a>
               </Link>
-              <div className="sketch-holder">
-                <ReactP5 setup={sketch.setup} draw={sketch.draw} />
-              </div>
-            </div>
+            </li>
           )
         }))}
+        </ul>
       </main>
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
