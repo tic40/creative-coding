@@ -3,12 +3,14 @@ function getSketchFileNames() {
   return fs.readdirSync('./sketches').map(v =>  v.split('.')[0])
 }
 
+const isProd = process.env.NODE_ENV === "production"
+
 /** @type {import('next').NextConfig} */
 module.exports = {
-  basePath: '/creative-coding',
-  assetPrefix: '/creative-coding/',
+  basePath: isProd ? '/creative-coding' : '',
+  assetPrefix: isProd ? '/creative-coding/' : '',
   env: {
-    siteName: 'tic40/creative-coding'
+    siteName: isProd ? 'tic40/creative-coding' : '[dev] tic40/creative-coding'
   },
   reactStrictMode: true,
   publicRuntimeConfig: {
