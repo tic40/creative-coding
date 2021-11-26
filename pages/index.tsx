@@ -10,7 +10,7 @@ const Home: NextPage = () => {
       <Head>
         <title>{process.env.siteName}</title>
         <meta name="description" content="{process.env.siteName}" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="favicon.ico" />
       </Head>
       <main className="m-4">
         <h1 className="text-4xl">
