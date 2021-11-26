@@ -8,6 +8,7 @@ interface Route {
 let route: Route[]
 let x = 0
 let y = 0
+let rev = false
 
 export function setup(p: p5Types, canvasParentRef: Element) {
   p.createCanvas(p.windowWidth, p.windowHeight).parent(canvasParentRef)
@@ -17,8 +18,10 @@ export function setup(p: p5Types, canvasParentRef: Element) {
 }
 
 export function draw(p: p5Types) {
-  x+=2
-  x %= p.width
+  if (p.width <= x) rev = true
+  if (x <= 0) rev = false
+
+  rev ? x-=2 : x+=2
 
   p.clear()
   p.background(0)
