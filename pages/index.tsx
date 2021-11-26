@@ -8,15 +8,14 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>
-          tic40/creative-coding</title>
-        <meta name="description" content="tic40/creative-coding" />
+        <title>{process.env.siteName}</title>
+        <meta name="description" content="{process.env.siteName}" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="m-4">
         <h1 className="text-4xl">
           <Link href="/">
-            <a>tic40/creative-coding</a>
+            <a>{process.env.siteName}</a>
           </Link>
         </h1>
         <ul className="my-4">

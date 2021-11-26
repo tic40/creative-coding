@@ -18,7 +18,7 @@ const Name: NextPage<Props> = ({ name }) => {
   return (
     <>
       <Head>
-        <title>{name} | tic40/creative-coding</title>
+        <title>{name} | {process.env.siteName}</title>
         <meta name="description" content="{name} | tic40/creative-coding" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

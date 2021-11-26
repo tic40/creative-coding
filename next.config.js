@@ -3,14 +3,15 @@ function getSketchFileNames() {
   return fs.readdirSync('./sketches').map(v =>  v.split('.')[0])
 }
 
-const sketchFileNames = getSketchFileNames()
-
 /** @type {import('next').NextConfig} */
 module.exports = {
   basePath: '/creative-coding',
   assetPrefix: '/creative-coding/',
+  env: {
+    siteName: 'tic40/creative-coding'
+  },
   reactStrictMode: true,
   publicRuntimeConfig: {
-    sketchFileNames
+    sketchFileNames: getSketchFileNames()
   },
 }
