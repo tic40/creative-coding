@@ -1,6 +1,15 @@
+const SKETCH_SORT_ORDER = [
+  'circle',
+  'circle_random',
+  'linear_interpolation',
+  'map',
+  'easing'
+]
+
 function getSketchFileNames() {
   const fs = require('fs')
-  return fs.readdirSync('./sketches').map(v =>  v.split('.')[0])
+  const fileNames = fs.readdirSync('./sketches').map(v =>  v.split('.')[0])
+  return SKETCH_SORT_ORDER.filter(v => fileNames.includes(v))
 }
 
 const isProd = process.env.NODE_ENV === "production"
