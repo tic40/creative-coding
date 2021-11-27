@@ -30,7 +30,7 @@ const bounceOut: EasingFunction = function (x) {
 	}
 }
 
-const easingsFunctions: EasingDictionary = {
+export const easingsFunctions: EasingDictionary = {
 	linear: (x) => x,
 	easeInQuad: function (x) {
 		return x * x
@@ -148,4 +148,35 @@ const easingsFunctions: EasingDictionary = {
 	},
 }
 
-export default easingsFunctions
+export const easingsFunctionNames = [
+  'linear',
+  'easeInQuad',
+  'easeInOutQuad',
+  'easeInCubic',
+  'easeOutCubic',
+  'easeInOutCubic',
+  'easeInQuart',
+  'easeOutQuart',
+  'easeInOutQuart',
+  'easeInQuint',
+  'easeOutQuint',
+  'easeInOutQuint',
+  'easeInSine',
+  'easeOutSine',
+  'easeInOutSine',
+  'easeInExpo',
+  'easeOutExpo',
+  'easeInOutExpo',
+  'easeInCirc',
+  'easeOutCirc',
+  'easeInOutCirc',
+  'easeInBack',
+  'easeOutBack',
+  'easeInOutBack',
+  'easeInElastic',
+  'easeOutElastic',
+  'easeInOutElastic',
+  'easeInBounce',
+  'easeOutBounce',
+  'easeInOutBounce'
+]

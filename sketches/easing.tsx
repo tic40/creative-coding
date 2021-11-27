@@ -1,43 +1,10 @@
 import p5Types from 'p5'
-import easings from '../utils/easings'
+import { easingsFunctions, easingsFunctionNames } from '../utils/easings'
 
 interface Route {
   x: number,
   y: number
 }
-
-const eas = [
-  'linear',
-  'easeInQuad',
-  'easeInOutQuad',
-  'easeInCubic',
-  'easeOutCubic',
-  'easeInOutCubic',
-  'easeInQuart',
-  'easeOutQuart',
-  'easeInOutQuart',
-  'easeInQuint',
-  'easeOutQuint',
-  'easeInOutQuint',
-  'easeInSine',
-  'easeOutSine',
-  'easeInOutSine',
-  'easeInExpo',
-  'easeOutExpo',
-  'easeInOutExpo',
-  'easeInCirc',
-  'easeOutCirc',
-  'easeInOutCirc',
-  'easeInBack',
-  'easeOutBack',
-  'easeInOutBack',
-  'easeInElastic',
-  'easeOutElastic',
-  'easeInOutElastic',
-  'easeInBounce',
-  'easeOutBounce',
-  'easeInOutBounce'
-]
 
 let route: Route[]
 let x = 0
@@ -48,7 +15,7 @@ let bottom = 0
 let prev = 0
 let next = 0
 let t = 0
-let easingName: string
+let currentEasingName: string
 
 export function setup(p: p5Types, canvasParentRef: Element) {
   p.createCanvas(p.windowWidth, p.windowHeight).parent(canvasParentRef)
@@ -59,28 +26,40 @@ export function setup(p: p5Types, canvasParentRef: Element) {
   y = bottom
   prev = bottom
   next = top
-  easingName = eas[ Math.floor(p.random(0, eas.length-1)) ]
+  setRandomEasingsFunctions()
 }
 
 export function draw(p: p5Types) {
-  t += 0.01
+  // 誤差がでるのでtは100倍の値を入れておく
+  t += 1
 
-  if (t >= 1.4) {
+  if (t >= 140) {
     t = 0
     const tmp = prev
     prev = next
     next = tmp
-    easingName = eas[ Math.floor(p.random(0, eas.length-1)) ]
+    setRandomEasingsFunctions()
     return
   }
-
-  if (t > 1.0) return
+  if (t > 100) return
 
   p.clear()
+
+  p.textSize(50)
+  p.fill(100)
+  p.stroke(100)
+  p.text(currentEasingName, 10, p.height/2)
+
+  p.strokeWeight(5)
   p.stroke(0)
-  p.strokeWeight(2)
   p.line(x, top, x, bottom)
+
+
   p.stroke("#FF0000")
-  const d = p.lerp(prev, next, easings[easingName](t));
+  const d = p.lerp(prev, next, easingsFunctions[currentEasingName](t/100))
   p.line(x+40, d, x-40, d)
+}
+
+function setRandomEasingsFunctions(): void {
+  currentEasingName = easingsFunctionNames[ Math.floor(Math.random()*easingsFunctionNames.length) ]
 }
