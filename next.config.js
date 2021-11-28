@@ -4,7 +4,8 @@ const SKETCH_SORT_ORDER = [
   'linear_interpolation',
   'map',
   'easing',
-  'sushi'
+  'sushi',
+  'kaiten_sushi',
 ]
 
 function getSketchFileNames() {
