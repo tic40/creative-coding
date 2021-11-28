@@ -39,5 +39,5 @@ export function draw(p: p5Types) {
 export function mouseClicked(p: p5Types) {
   t = 0
   num = Math.floor(num*1.5)
-  if (100 < num) num = DEFAULT_NUM
+  if (50 < num) num = DEFAULT_NUM
 }
