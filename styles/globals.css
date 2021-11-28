@@ -7,6 +7,6 @@
     @apply hover:opacity-50;
   }
   a.link {
-    @apply text-pink-800;
+    @apply text-blue-500;
   }
 }
