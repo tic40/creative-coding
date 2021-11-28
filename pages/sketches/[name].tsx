@@ -20,10 +20,15 @@ const Name: NextPage<Props> = ({ name }) => {
       <Head>
         <title>{name} | {process.env.siteName}</title>
         <meta name="description" content={`${name} | tic40/creative-coding`} />
-        <link rel="icon" href="favicon.ico" />
+        <link rel="icon" href="../favicon.ico" />
       </Head>
       <div className="sketch-holder">
-        <ReactP5 setup={sketch.setup} draw={sketch.draw} />
+        <ReactP5
+          setup={sketch.setup}
+          draw={sketch.draw}
+          preload={sketch.preload}
+          mouseClicked={sketch.mouseClicked}
+        />
       </div>
     </>
   )

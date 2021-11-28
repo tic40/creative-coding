@@ -3,7 +3,8 @@ const SKETCH_SORT_ORDER = [
   'circle_random',
   'linear_interpolation',
   'map',
-  'easing'
+  'easing',
+  'sushi'
 ]
 
 function getSketchFileNames() {
