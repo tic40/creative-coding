@@ -1,7 +1,7 @@
 import p5Types from 'p5'
 
 interface Point {
-  x: number, y: number
+  x: number, y: number, r: number
 }
 
 let t = 0
@@ -9,10 +9,12 @@ let stars: Point[] = []
 export function setup(p: p5Types, canvasParentRef: Element) {
   p.createCanvas(p.windowWidth, p.windowHeight).parent(canvasParentRef)
 
-  for (let i = 0; i < 150; i++) {
+  stars = []
+  for (let i = 0; i < 120; i++) {
     const x = p.random(0,p.width)
     const y = p.random(0,p.height)
-    stars.push({ x, y })
+    const r = p.random(1.4,2.0)
+    stars.push({ x, y, r })
   }
 }
 
@@ -21,7 +23,7 @@ export function draw(p: p5Types) {
   p.clear()
   p.background(0)
 
-  for(const { x, y } of stars) p.circle(x,y,1.6)
+  for(const { x,y,r } of stars) p.circle(x,y,r)
 
   p.translate(p.width/2, p.height/2)
   p.circle(0,0,8)
