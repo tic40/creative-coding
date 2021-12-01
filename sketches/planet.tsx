@@ -26,7 +26,7 @@ export function draw(p: p5Types) {
   for(const { x,y,r } of stars) p.circle(x,y,r)
 
   p.translate(p.width/2, p.height/2)
-  p.circle(0,0,8)
+  p.circle(0,0,12)
 
   for(let i = 7; i <= 15; i++) {
     const r = p.map(i*i*i, 0, 3375, 0, (Math.min(p.height, p.width)-30)/2)
