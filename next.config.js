@@ -7,7 +7,8 @@ const SKETCH_SORT_ORDER = [
   'sushi',
   'kaiten_sushi',
   'dots',
-  'planet'
+  'planet',
+  'moving_rectangles'
 ]
 
 function getSketchFileNames() {
