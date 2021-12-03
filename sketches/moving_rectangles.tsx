@@ -13,6 +13,7 @@ class Rectangle {
   public dir: number
   public dist: number
   public color: p5Types.Color
+  public life: number
   public hist: Array<Point[]>
 
   constructor(size: number, x: number, y: number, angle: number, dir: number, dist: number, color: p5Types.Color) {
@@ -25,6 +26,7 @@ class Rectangle {
     this.color = color
 
     this.hist = []
+    this.life = 500
   }
 }
 
@@ -38,8 +40,8 @@ function addRectangle(p: p5Types) {
   rectangles.push(
     new Rectangle(
       size,
-      p.width/2 + p.random(-100, 100),
-      p.height/2 + p.random(-100, 100),
+      p.random(0, p.width),
+      p.random(0, p.height),
       0,
       p.random(0, 360),
       p.dist(0, 0, size, size),
@@ -64,10 +66,8 @@ export function draw(p: p5Types) {
   t++
   p.clear()
 
-  if (t % 255 === 0) {
-    if (3 <= rectangles.length) rectangles.shift()
-    if (rectangles.length < 3) addRectangle(p)
-  }
+  if (t % 100 === 0) addRectangle(p)
+  rectangles = rectangles.filter((v) => 0 <= v.life)
 
   for(const v of rectangles) {
     if (p.width <= v.x + v.size) v.dir = p.random(90, 270)
@@ -75,7 +75,8 @@ export function draw(p: p5Types) {
     if (p.height <= v.y + v.size) v.dir = p.random(180, 360)
     if (v.y - v.size <= 0) v.dir = p.random(0, 180)
 
-    v.color.setAlpha(255)
+    const alpha = 25 < v.life ? 255 : p.map(v.life, 0, 25, 0, 255)
+    v.color.setAlpha(alpha)
     p.stroke(v.color)
     p.translate(v.x, v.y)
     p.rotate(v.angle)
@@ -95,16 +96,19 @@ export function draw(p: p5Types) {
     for(let i = 1; i < v.hist.length; i++) {
       const cur = v.hist[i]
       for (let j = 0; j < 4; j++) {
-        v.color.setAlpha(255-i*2)
+
+        const alpha = p.map(i, 0, 128, v.life, 0)
+        v.color.setAlpha(alpha)
         p.stroke(v.color)
         p.line(prev[j].x, prev[j].y, cur[j].x, cur[j].y)
       }
       prev = cur
     }
 
-    if (v.hist.length > 123) v.hist.pop()
+    if (v.hist.length >= 128) v.hist.pop()
     v.x += p.cos(v.dir) * speed
     v.y += p.sin(v.dir) * speed
     v.angle += 1
+    v.life--
   }
 }
