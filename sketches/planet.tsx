@@ -3,9 +3,14 @@ import p5Types from 'p5'
 interface Point {
   x: number, y: number, r: number
 }
+interface ShootingStar {
+  x: number, y: number, r: number, dir: number, speed: number, life: number
+}
 
 let t = 0
 let stars: Point[] = []
+let shootingStar: ShootingStar | null
+
 export function setup(p: p5Types, canvasParentRef: Element) {
   p.createCanvas(p.windowWidth, p.windowHeight).parent(canvasParentRef)
 
@@ -23,8 +28,18 @@ export function draw(p: p5Types) {
   p.clear()
   p.background(0)
 
-  for(const { x,y,r } of stars) p.circle(x,y,r)
+  if (!shootingStar) {
+    shootingStar = {
+      x: p.random(0, p.width),
+      y: p.random(0, p.width),
+      r: p.random(2,4),
+      dir: p.random(0, 360),
+      speed: p.random(3,7),
+      life: 100
+    }
+  }
 
+  for(const { x,y,r } of stars) p.circle(x,y,r)
   p.translate(p.width/2, p.height/2)
   p.circle(0,0,12)
 
@@ -40,5 +55,13 @@ export function draw(p: p5Types) {
     p.noFill()
     p.circle(0, 0, r*2)
     p.pop()
+  }
+
+  if (shootingStar) {
+    shootingStar.x += p.cos(p.radians(shootingStar.dir)) * shootingStar.speed
+    shootingStar.y += p.sin(p.radians(shootingStar.dir)) * shootingStar.speed
+    shootingStar.life--
+    p.circle(shootingStar.x, shootingStar.y, shootingStar.r)
+    if (shootingStar.life <= 0) shootingStar = null
   }
 }
