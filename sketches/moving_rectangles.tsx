@@ -40,8 +40,8 @@ function addRectangle(p: p5Types) {
   rectangles.push(
     new Rectangle(
       size,
-      p.random(0, p.width),
-      p.random(0, p.height),
+      p.random(p.width/2 - 100, p.width/2 + 100),
+      p.random(p.height/2 - 100, p.height/2 + 100),
       0,
       p.random(0, 360),
       p.dist(0, 0, size, size),
