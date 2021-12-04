@@ -6,6 +6,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}'",
     "export": "next build && next export"
   },
   "dependencies": {
@@ -17,10 +19,13 @@
   "devDependencies": {
     "@types/node": "16.11.10",
     "@types/react": "17.0.36",
+    "@typescript-eslint/eslint-plugin": "^5.5.0",
     "autoprefixer": "^10.4.0",
     "eslint": "7",
     "eslint-config-next": "12.0.4",
+    "eslint-config-prettier": "^8.3.0",
     "postcss": "^8.4.1",
+    "prettier": "^2.5.0",
     "tailwindcss": "^2.2.19",
     "typescript": "4.5.2"
   }
