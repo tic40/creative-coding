@@ -8,26 +8,27 @@ const SKETCH_SORT_ORDER = [
   'kaiten_sushi',
   'dots',
   'planet',
-  'moving_rectangles'
+  'moving_rectangles',
+  'lissajous_curve',
 ]
 
 function getSketchFileNames() {
   const fs = require('fs')
-  const fileNames = fs.readdirSync('./sketches').map(v =>  v.split('.')[0])
-  return SKETCH_SORT_ORDER.filter(v => fileNames.includes(v))
+  const fileNames = fs.readdirSync('./sketches').map((v) => v.split('.')[0])
+  return SKETCH_SORT_ORDER.filter((v) => fileNames.includes(v))
 }
 
-const isProd = process.env.NODE_ENV === "production"
+const isProd = process.env.NODE_ENV === 'production'
 
 /** @type {import('next').NextConfig} */
 module.exports = {
   basePath: isProd ? '/creative-coding' : '',
   assetPrefix: isProd ? '/creative-coding/' : '',
   env: {
-    siteName: isProd ? 'tic40/creative-coding' : '[dev] tic40/creative-coding'
+    siteName: isProd ? 'tic40/creative-coding' : '[dev] tic40/creative-coding',
   },
   reactStrictMode: true,
   publicRuntimeConfig: {
-    sketchFileNames: getSketchFileNames()
+    sketchFileNames: getSketchFileNames(),
   },
 }
