@@ -4,7 +4,9 @@ import getConfig from 'next/config'
 import Link from 'next/link'
 
 const Home: NextPage = () => {
-  const { publicRuntimeConfig: { sketchFileNames } } = getConfig()
+  const {
+    publicRuntimeConfig: { sketchFileNames },
+  } = getConfig()
   return (
     <>
       <Head>
@@ -19,8 +21,8 @@ const Home: NextPage = () => {
           </Link>
         </h1>
         <ul className="my-4">
-          {(sketchFileNames.map((name: string) => {
-            const sketch = require(`../sketches/${name}`)
+          {sketchFileNames.map((name: string) => {
+            // const sketch = require(`../sketches/${name}`)
             return (
               <li key={`sketch-${name}`}>
                 <Link href={`/sketches/${name}`}>
@@ -28,7 +30,7 @@ const Home: NextPage = () => {
                 </Link>
               </li>
             )
-          }))}
+          })}
         </ul>
         <footer>
           <a

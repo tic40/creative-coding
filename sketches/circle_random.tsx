@@ -5,5 +5,5 @@ export function setup(p: p5Types, canvasParentRef: Element) {
 }
 
 export function draw(p: p5Types) {
-  p.circle(p.mouseX, p.mouseY, p.random(100));
+  p.circle(p.mouseX, p.mouseY, p.random(100))
 }

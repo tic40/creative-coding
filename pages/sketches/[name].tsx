@@ -14,11 +14,15 @@ const ReactP5 = dynamic(() => import('react-p5'), {
 })
 
 const Name: NextPage<Props> = ({ name }) => {
+  /* eslint-disable @typescript-eslint/no-var-requires */
   const sketch = require(`../../sketches/${name}`)
+  /* eslint-enable @typescript-eslint/no-var-requires */
   return (
     <>
       <Head>
-        <title>{name} | {process.env.siteName}</title>
+        <title>
+          {name} | {process.env.siteName}
+        </title>
         <meta name="description" content={`${name} | tic40/creative-coding`} />
         <link rel="icon" href="../favicon.ico" />
       </Head>
@@ -37,8 +41,8 @@ const Name: NextPage<Props> = ({ name }) => {
 export const getStaticProps: GetStaticProps = (context) => {
   return {
     props: {
-      name: context.params?.name
-    }
+      name: context.params?.name,
+    },
   }
 }
 

@@ -1,7 +1,7 @@
 import p5Types from 'p5'
 
 interface Route {
-  x: number,
+  x: number
   y: number
 }
 
@@ -11,21 +11,21 @@ let i = 0
 
 export function setup(p: p5Types, canvasParentRef: Element) {
   p.createCanvas(p.windowWidth, p.windowHeight).parent(canvasParentRef)
-  const centerX = p.windowWidth/5
-  const centerY = p.windowHeight/5
+  const centerX = p.windowWidth / 5
+  const centerY = p.windowHeight / 5
   route = [
-    { x: p.windowWidth/5, y: p.windowHeight/5 },
-    { x: p.windowWidth/5*4, y: p.windowHeight/5*4 },
-    { x: p.windowWidth/5*4, y: p.windowHeight/5 },
-    { x: p.windowWidth/5, y: p.windowHeight/5*4 },
+    { x: p.windowWidth / 5, y: p.windowHeight / 5 },
+    { x: (p.windowWidth / 5) * 4, y: (p.windowHeight / 5) * 4 },
+    { x: (p.windowWidth / 5) * 4, y: p.windowHeight / 5 },
+    { x: p.windowWidth / 5, y: (p.windowHeight / 5) * 4 },
   ]
 }
 
 export function draw(p: p5Types) {
   p.clear()
-  p.fill("#FF0000")
+  p.fill('#FF0000')
   p.noStroke()
-  for(const { x, y } of route) {
+  for (const { x, y } of route) {
     p.circle(x, y, 30)
   }
   const prev = route[i]

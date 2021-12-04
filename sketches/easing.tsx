@@ -38,21 +38,24 @@ export function draw(p: p5Types) {
 
   p.strokeWeight(0)
   p.textSize(16)
-  easingsFunctionNames.forEach((v,i) => {
-    if (v == currentEasingName) p.fill("#FF0000")
+  easingsFunctionNames.forEach((v, i) => {
+    if (v == currentEasingName) p.fill('#FF0000')
     else p.fill(150)
-    p.text(v, 16, p.height/10 + i*16)
+    p.text(v, 16, p.height / 10 + i * 16)
   })
 
   p.strokeWeight(5)
   p.stroke(0)
   p.line(x, top, x, bottom)
 
-  p.stroke("#FF0000")
-  const d = p.lerp(prev, next, easingsFunctions[currentEasingName](t/100))
-  p.line(x+40, d, x-40, d)
+  p.stroke('#FF0000')
+  const d = p.lerp(prev, next, easingsFunctions[currentEasingName](t / 100))
+  p.line(x + 40, d, x - 40, d)
 }
 
 function setRandomEasingsFunctions(): void {
-  currentEasingName = easingsFunctionNames[ Math.floor(Math.random()*easingsFunctionNames.length) ]
+  currentEasingName =
+    easingsFunctionNames[
+      Math.floor(Math.random() * easingsFunctionNames.length)
+    ]
 }

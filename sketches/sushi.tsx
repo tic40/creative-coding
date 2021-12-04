@@ -7,7 +7,7 @@ const DEFAULT_NUM = 2
 let num = DEFAULT_NUM
 
 export function preload(p: p5Types) {
-  img = p.loadImage(IMAGE_PATH);
+  img = p.loadImage(IMAGE_PATH)
 }
 
 export function setup(p: p5Types, canvasParentRef: Element) {
@@ -22,13 +22,13 @@ export function draw(p: p5Types) {
 
     const w = p.width / num
     const h = img.height * (w / img.width)
-    let x = w/2
-    let y = h/2
+    let x = w / 2
+    let y = h / 2
 
-    while(y <= p.height) {
-      for(let i = 0; i < num; i++) {
-        const nx = x + (w*i)
-        p.image(img, nx, y, w*(t/100), h*(t/100))
+    while (y <= p.height) {
+      for (let i = 0; i < num; i++) {
+        const nx = x + w * i
+        p.image(img, nx, y, w * (t / 100), h * (t / 100))
       }
       y += h
     }
@@ -38,6 +38,6 @@ export function draw(p: p5Types) {
 
 export function mouseClicked(p: p5Types) {
   t = 0
-  num = Math.floor(num*1.5)
+  num = Math.floor(num * 1.5)
   if (50 < num) num = DEFAULT_NUM
 }

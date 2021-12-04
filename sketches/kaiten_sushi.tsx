@@ -7,7 +7,7 @@ const DEFAULT_NUM = 8
 let num = DEFAULT_NUM
 
 export function preload(p: p5Types) {
-  img = p.loadImage(IMAGE_PATH);
+  img = p.loadImage(IMAGE_PATH)
 }
 
 export function setup(p: p5Types, canvasParentRef: Element) {
@@ -21,25 +21,25 @@ export function draw(p: p5Types) {
 
   const w = p.width / num
   const h = w // img.height * (w / img.width)
-  let x = w/2
-  let y = h/2
+  let x = w / 2
+  let y = h / 2
 
   let even = true
-  while(y <= p.height) {
-    for(let i = 0; i < num; i++) {
-      let nx = x + (w*i)
+  while (y <= p.height) {
+    for (let i = 0; i < num; i++) {
+      let nx = x + w * i
       let ny = y
 
       if (even) {
-        if (i === num-1) ny += t%h
-        else nx += t%w
+        if (i === num - 1) ny += t % h
+        else nx += t % w
       } else {
-        if (i === 0) ny -= t%h
-        else nx -= t%w
+        if (i === 0) ny -= t % h
+        else nx -= t % w
       }
 
       p.translate(nx, ny)
-      p.rotate(t/100)
+      p.rotate(t / 100)
       p.image(img, 0, 0, w, h)
       p.resetMatrix()
     }

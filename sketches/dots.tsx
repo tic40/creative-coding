@@ -13,7 +13,7 @@ export function draw(p: p5Types) {
   t %= p.height / (n - 1)
   p.clear()
   p.background(0)
-  const maxDist = p.dist(0, 0, p.width / 2, p.height / 2);
+  const maxDist = p.dist(0, 0, p.width / 2, p.height / 2)
 
   for (let y = 0; y < n; y++) {
     for (let x = 0; x < n; x++) {
@@ -21,10 +21,10 @@ export function draw(p: p5Types) {
       const ty = (p.height / (n - 1)) * y
 
       const d = p.dist(tx, ty, p.mouseX, p.mouseY)
-      const h = p.map(d, 0, maxDist, 0, 360);
-      p.fill(h, 255, 255);
+      const h = p.map(d, 0, maxDist, 0, 360)
+      p.fill(h, 255, 255)
       p.noStroke()
-      p.circle(tx, ty+t, 10)
+      p.circle(tx, ty + t, 10)
     }
   }
 }
