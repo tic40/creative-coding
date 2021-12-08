@@ -66,8 +66,8 @@ function drawItem(p: p5Types) {
     } else {
       const x = p.width / 4 + p.cos(baseRad + rad) * rx
       const y = p.height / 2 + p.sin(baseRad + rad) * ry
-      p.circle(x, y, 10)
-      p.circle(p.width - x, p.height - y, 10)
+      p.circle(x, y, 8)
+      p.circle(p.width - x, p.height - y, 8)
       a.push({ x, y })
       b.push({ x: p.width - x, y: p.height - y })
     }
@@ -83,9 +83,7 @@ function drawItem(p: p5Types) {
     p.stroke(240)
     p.noFill()
 
-    for (let i = 0; i < a.length; i++) {
-      p.line(a[i].x, a[i].y, b[i].x, b[i].y)
-    }
+    for (let i = 0; i < a.length; i++) p.line(a[i].x, a[i].y, b[i].x, b[i].y)
     p.pop()
   }
 }
