@@ -10,6 +10,7 @@ const SKETCH_SORT_ORDER = [
   'planet',
   'moving_rectangles',
   'lissajous_curve',
+  'circular_motion',
 ]
 
 function getSketchFileNames() {
