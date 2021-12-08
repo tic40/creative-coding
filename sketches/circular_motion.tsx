@@ -45,7 +45,7 @@ function init(p: p5Types) {
   rx = 200
   ry = 0
   baseRad = 0
-  speed = p.random(0.8, 2.4)
+  speed = p.random(0.8, 3.2)
   dx = Math.floor(p.random(0, 10)) % 2 === 0
   dy = Math.floor(p.random(0, 10)) % 2 === 0
   vertical = Math.floor(p.random(0, 10)) % 2 === 0
@@ -62,7 +62,7 @@ function drawItem(p: p5Types) {
       p.circle(x, y, 10)
       p.circle(x, p.height - y, 10)
       a.push({ x, y })
-      b.push({ x: p.width - x, y: p.height - y })
+      b.push({ x: x, y: p.height - y })
     } else {
       const x = p.width / 4 + p.cos(baseRad + rad) * rx
       const y = p.height / 2 + p.sin(baseRad + rad) * ry
