@@ -42,10 +42,10 @@ export function mouseClicked() {
 
 function init(p: p5Types) {
   t = 0
-  rx = 200
+  rx = p.random(10, 200)
   ry = 0
   baseRad = 0
-  speed = p.random(0.8, 3.2)
+  speed = p.random(0.4, 1.2)
   dx = Math.floor(p.random(0, 10)) % 2 === 0
   dy = Math.floor(p.random(0, 10)) % 2 === 0
   vertical = Math.floor(p.random(0, 10)) % 2 === 0
@@ -59,8 +59,8 @@ function drawItem(p: p5Types) {
     if (vertical) {
       const x = p.width / 2 + p.cos(baseRad + rad) * rx
       const y = p.height / 4 + p.sin(baseRad + rad) * ry
-      p.circle(x, y, 10)
-      p.circle(x, p.height - y, 10)
+      p.circle(x, y, 8)
+      p.circle(x, p.height - y, 8)
       a.push({ x, y })
       b.push({ x: x, y: p.height - y })
     } else {
