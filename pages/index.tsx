@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import getConfig from 'next/config'
 import Link from 'next/link'
+import Meta from '../components/meta'
 
 const Home: NextPage = () => {
   const {
@@ -9,11 +9,10 @@ const Home: NextPage = () => {
   } = getConfig()
   return (
     <>
-      <Head>
-        <title>{process.env.siteName}</title>
-        <meta name="description" content={process.env.siteName} />
-        <link rel="icon" href="favicon.ico" />
-      </Head>
+      <Meta
+        title={process.env.siteName || ''}
+        description={process.env.siteName || ''}
+      />
       <main className="m-4">
         <h1 className="text-4xl">
           <Link href="/">
@@ -22,7 +21,6 @@ const Home: NextPage = () => {
         </h1>
         <ul className="my-4">
           {sketchFileNames.map((name: string) => {
-            // const sketch = require(`../sketches/${name}`)
             return (
               <li key={`sketch-${name}`}>
                 <Link href={`/sketches/${name}`}>

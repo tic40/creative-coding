@@ -27,6 +27,7 @@ module.exports = {
   assetPrefix: isProd ? '/creative-coding/' : '',
   env: {
     siteName: isProd ? 'tic40/creative-coding' : '[dev] tic40/creative-coding',
+    ogImage: 'https://avatars.githubusercontent.com/u/739402?v=4?s=400'
   },
   reactStrictMode: true,
   publicRuntimeConfig: {

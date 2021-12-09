@@ -1,6 +1,6 @@
 import getConfig from 'next/config'
 import dynamic from 'next/dynamic'
-import Head from 'next/head'
+import Meta from '../../components/meta'
 import type { NextPage } from 'next'
 import { GetStaticProps, GetStaticPaths } from 'next'
 
@@ -19,13 +19,10 @@ const Name: NextPage<Props> = ({ name }) => {
   /* eslint-enable @typescript-eslint/no-var-requires */
   return (
     <>
-      <Head>
-        <title>
-          {name} | {process.env.siteName}
-        </title>
-        <meta name="description" content={`${name} | tic40/creative-coding`} />
-        <link rel="icon" href="../favicon.ico" />
-      </Head>
+      <Meta
+        title={`${name} | ${process.env.siteName}`}
+        description={`${name} | ${process.env.siteName}`}
+      />
       <div className="sketch-holder">
         <ReactP5
           setup={sketch.setup}
