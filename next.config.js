@@ -1,16 +1,15 @@
 const SKETCH_SORT_ORDER = [
   'circle',
   'circle_random',
-  'linear_interpolation',
-  'map',
+  'linear',
   'easing',
   'sushi',
   'kaiten_sushi',
   'dots',
   'planet',
-  'moving_rectangles',
+  'rectangle_fish',
   'lissajous_curve',
-  'circular_motion',
+  'circular',
 ]
 
 function getSketchFileNames() {
