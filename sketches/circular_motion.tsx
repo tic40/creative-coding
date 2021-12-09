@@ -42,7 +42,7 @@ export function mouseClicked() {
 
 function init(p: p5Types) {
   t = 0
-  rx = p.random(10, 200)
+  rx = p.random(-150, 150)
   ry = 0
   baseRad = 0
   speed = p.random(0.4, 1.2)
