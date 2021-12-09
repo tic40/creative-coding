@@ -1,6 +1,12 @@
 import Head from 'next/head'
 
-const Meta = ({ title, description }: { title: string, description: string }) => {
+const Meta = ({
+  title,
+  description,
+}: {
+  title: string
+  description: string
+}) => {
   return (
     <Head>
       <title>{title}</title>
@@ -8,7 +14,7 @@ const Meta = ({ title, description }: { title: string, description: string }) =>
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={process.env.ogImage} />
-      <meta name="twitter:card" content="summary"/>
+      <meta name="twitter:card" content="summary" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
   )
