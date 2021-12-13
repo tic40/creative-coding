@@ -15,7 +15,7 @@ const Meta = ({
       <meta property="og:description" content={description} />
       <meta property="og:image" content={process.env.ogImage} />
       <meta name="twitter:card" content="summary" />
-      <link rel="icon" href="/favicon.ico" />
+      <link rel="icon" href={`${process.env.basePath}/favicon.ico`} />
     </Head>
   )
 }

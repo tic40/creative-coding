@@ -27,6 +27,7 @@ module.exports = {
   basePath: isProd ? '/creative-coding' : '',
   assetPrefix: isProd ? '/creative-coding/' : '',
   env: {
+    basePath: isProd ? '/creative-coding/' : '',
     siteName: isProd ? 'tic40/creative-coding' : '[dev] tic40/creative-coding',
     ogImage: 'https://avatars.githubusercontent.com/u/739402?v=4?s=400',
   },
