@@ -11,9 +11,11 @@ const SKETCH_SORT_ORDER = [
   'lissajous_curve',
   'circular',
   'bounce',
+  'ellipse',
 ]
 
 function getSketchFileNames() {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const fs = require('fs')
   const fileNames = fs.readdirSync('./sketches').map((v) => v.split('.')[0])
   return SKETCH_SORT_ORDER.filter((v) => fileNames.includes(v))
@@ -21,7 +23,6 @@ function getSketchFileNames() {
 
 const isProd = process.env.NODE_ENV === 'production'
 
-/** @type {import('next').NextConfig} */
 module.exports = {
   basePath: isProd ? '/creative-coding' : '',
   assetPrefix: isProd ? '/creative-coding/' : '',
