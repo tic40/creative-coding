@@ -1,11 +1,10 @@
-## URL
-[tic40.github.io/creative-coding](https://tic40.github.io/creative-coding)
+# creative-coding
+
+- [WEB](https://tic40.github.io/creative-coding)
 
 ## Getting Started
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-
-First, run the development server:
+### Run
 
 ```bash
 npm run dev
@@ -13,9 +12,6 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-
 ## Deploy
 
-Just merge into the main branch and it will be deployed automatically by GitHub actions.
+Just merge into the main branch and it will be deployed automatically to GitHub pages by GitHub actions.
