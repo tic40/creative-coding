@@ -10,6 +10,7 @@ const bottomMargin = 10
 let points: Point[]
 let t = 0
 let base = 0
+let speed = 3
 
 export function setup(p: p5Types, canvasParentRef: Element) {
   p.createCanvas(p.windowWidth, p.windowHeight).parent(canvasParentRef)
@@ -19,7 +20,7 @@ export function setup(p: p5Types, canvasParentRef: Element) {
 
 export function draw(p: p5Types) {
   t++
-  if (t % 3) return
+  if (t % speed) return
 
   p.clear()
   p.background(230)
@@ -36,6 +37,17 @@ export function draw(p: p5Types) {
     points = points.map((v) => ({ x: v.x, y: v.y - np.y }))
   }
 
+  if (p.height - bottomMargin < np.y) {
+    const diff = np.y - (p.height - bottomMargin)
+    if (base < diff) {
+      base = 0
+      points = points.map((v) => ({ x: v.x, y: Math.min(p.height - bottomMargin, v.y - base )}))
+    } else {
+      base -= diff
+      points = points.map((v) => ({ x: v.x, y: Math.min(p.height - bottomMargin, v.y - diff )}))
+    }
+  }
+
   drawBorder(p)
   drawLine(p)
 }
@@ -47,9 +59,22 @@ function initPoint(p: p5Types): void {
 }
 
 function nextPoint(p: p5Types): Point {
+  let n = 1
+  const v = Math.floor( p.random(1, 100) )
+  if (v <= 50) n *= 2
+  else if (v <= 70) n *= 3
+  else if (v <= 80) n *= 5
+  else if (v <= 90) n *= 10
+  else if (v <= 95) n *= 20
+  else if (v <= 97) n *= 30
+  else if (v <= 99) n *= 40
+  else n *= 100
+
   const x = points[points.length - 1].x + 1
-  const y = points[points.length - 1].y + Math.floor(p.random(-20, 20))
-  return { x, y: Math.min(p.height - bottomMargin, y) }
+  const high = Math.floor(p.random(1, 100)) >= 99 ? n * 20 : n
+  const bottom = Math.floor(p.random(1, 100)) === 100 ? -n * 2 : -n
+  const y = points[points.length - 1].y + Math.floor(p.random(bottom, high))
+  return { x, y }
 }
 
 function drawBorder(p: p5Types): void {
@@ -74,4 +99,9 @@ function drawLine(p: p5Types): void {
     const nx = points[i + 1]
     p.line(cur.x, cur.y, nx.x, nx.y)
   }
+}
+
+export function mouseClicked() {
+  speed++
+  if (3 < speed) speed = 1
 }
