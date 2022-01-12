@@ -47,7 +47,7 @@ function drawPixel(x: number, y: number, v: number) {
   } else if (v <= 0.775) {
     layer.fill('#808080')
   } else {
-    layer.fill('#fff')
+    layer.fill('#DA3E32')
   }
 
   layer.rect(x, y, size, size)
