@@ -1,6 +1,6 @@
 import p5Types from 'p5'
 
-const size = 4
+const size = 2
 const speed = 3
 let layer: p5Types.Graphics
 
