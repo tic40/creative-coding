@@ -41,10 +41,16 @@ export function draw(p: p5Types) {
     const diff = np.y - (p.height - bottomMargin)
     if (base < diff) {
       base = 0
-      points = points.map((v) => ({ x: v.x, y: Math.min(p.height - bottomMargin, v.y - base )}))
+      points = points.map((v) => ({
+        x: v.x,
+        y: Math.min(p.height - bottomMargin, v.y - base),
+      }))
     } else {
       base -= diff
-      points = points.map((v) => ({ x: v.x, y: Math.min(p.height - bottomMargin, v.y - diff )}))
+      points = points.map((v) => ({
+        x: v.x,
+        y: Math.min(p.height - bottomMargin, v.y - diff),
+      }))
     }
   }
 
@@ -60,7 +66,7 @@ function initPoint(p: p5Types): void {
 
 function nextPoint(p: p5Types): Point {
   let n = 1
-  const v = Math.floor( p.random(1, 100) )
+  const v = Math.floor(p.random(1, 100))
   if (v <= 50) n *= 2
   else if (v <= 70) n *= 3
   else if (v <= 80) n *= 5
