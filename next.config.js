@@ -13,6 +13,7 @@ const SKETCH_SORT_ORDER = [
   'bounce',
   'ellipse',
   'random_walk',
+  'heat_map',
 ]
 
 function getSketchFileNames() {
