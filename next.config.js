@@ -14,6 +14,7 @@ const SKETCH_SORT_ORDER = [
   'ellipse',
   'random_walk',
   'heat_map',
+  'particle',
 ]
 
 function getSketchFileNames() {
