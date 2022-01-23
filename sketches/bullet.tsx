@@ -39,9 +39,9 @@ class Enemy {
   }
 
   shoot() {
-    if (this.shotType === '3Way') {
+    if (this.shotType === '3way') {
       this.nWayShot(2)
-    } else if (this.shotType === '5Way') {
+    } else if (this.shotType === '5way') {
       this.nWayShot(3)
     } else if (this.shotType === 'allRound') {
       this.allRoundShot()
@@ -60,7 +60,7 @@ class Enemy {
       angle: p.atan2(p.mouseY - this.y, p.mouseX - p.width / 2),
       speed,
       size,
-      color: '#de9610',
+      color: '#65ace4',
     })
     this.bullets.push(bullet)
   }
@@ -95,7 +95,7 @@ class Enemy {
           angle,
           speed,
           size,
-          color: '#f2cf01',
+          color: '#65ace4',
         })
         this.bullets.push(bullet)
       }
@@ -123,7 +123,7 @@ class Enemy {
   }
 
   draw() {
-    this.p.fill('#c93a40')
+    this.p.fill('#65ace4')
     this.p.rect(this.x - 5, this.y - 5, 10, 10)
     this.bullets.forEach((v) => v.draw(this.p))
   }
@@ -134,6 +134,62 @@ class Enemy {
 
   private bullet() {
     return Bullet
+  }
+}
+
+class Own {
+  x: number
+  y: number
+  p: p5Types
+  bullets: Bullet[]
+
+  constructor(x: number, y: number, p: p5Types) {
+    this.x = x
+    this.y = y
+    this.p = p
+    this.bullets = []
+  }
+
+  shoot() {
+    this.normalShot()
+  }
+
+  normalShot() {
+    const p = this.p
+    const bullet = new (this.bullet())({
+      x: this.x,
+      y: this.y,
+      angle: p.radians(-90),
+      speed: 8,
+      size: 8,
+      color: '#56a764',
+    })
+    this.bullets.push(bullet)
+    console.log(bullet.angle)
+  }
+
+  update() {
+    const p = this.p
+    this.x = p.mouseX
+    this.y = p.mouseY
+    this.bullets.forEach((v) => v.update(p))
+    this.bullets = this.bullets.filter((bullet) =>
+      this.inScreen(bullet.x, bullet.y)
+    )
+  }
+
+  draw() {
+    this.p.fill('#56a764')
+    this.p.rect(this.p.mouseX - 5, this.p.mouseY - 10, 10, 10)
+    this.bullets.forEach((v) => v.draw(this.p))
+  }
+
+  private bullet() {
+    return Bullet
+  }
+
+  inScreen(x: number, y: number) {
+    return x >= 0 && x < this.p.width && y >= 0 && y < this.p.height
   }
 }
 
@@ -166,27 +222,9 @@ class Bullet {
   }
 }
 
-class Own {
-  x: number
-  y: number
-  p: p5Types
-
-  constructor(x: number, y: number, p: p5Types) {
-    this.x = x
-    this.y = y
-    this.p = p
-  }
-
-  draw() {
-    this.p.fill('#56a764')
-    this.p.rect(this.p.mouseX - 5, this.p.mouseY - 10, 10, 10)
-  }
-}
-
-let dark = false
 let enemy: Enemy
 let own: Own
-const shotTypes = ['aim', '3Way', '5way', 'allRound', 'aimBig']
+const shotTypes = ['aim', '3way', '5way', 'allRound', 'aimBig']
 
 export function setup(p: p5Types, canvasParentRef: Element) {
   p.createCanvas(p.windowWidth, p.windowHeight).parent(canvasParentRef)
@@ -201,7 +239,6 @@ export function setup(p: p5Types, canvasParentRef: Element) {
 
 export function draw(p: p5Types) {
   p.clear()
-  p.background(dark ? 40 : 240)
 
   if (p.frameCount % 200 === 0) {
     enemy.shotType = p.random(shotTypes)
@@ -211,10 +248,11 @@ export function draw(p: p5Types) {
     enemy.shoot()
 
   enemy.update()
+  own.update()
   enemy.draw()
   own.draw()
 }
 
 export function mouseClicked() {
-  dark = !dark
+  own.shoot()
 }
