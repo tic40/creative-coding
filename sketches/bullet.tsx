@@ -1,5 +1,4 @@
 import p5Types from 'p5'
-import { threadId } from 'worker_threads'
 
 interface BulletParam {
   x: number
@@ -22,7 +21,8 @@ class Enemy {
   y: number
   p: p5Types
   bullets: Bullet[]
-  bulletSpeed: number = 5
+  baseBulletSpeed: number = 5
+  baseBulletSize: number = 8
   moveSpeed: number = 5
   destX: number
   destY: number
@@ -39,28 +39,33 @@ class Enemy {
   }
 
   shoot() {
-    if (this.shotType === 'nWay') {
-      this.nWayShot()
+    if (this.shotType === '3Way') {
+      this.nWayShot(2)
+    } else if (this.shotType === '5Way') {
+      this.nWayShot(3)
     } else if (this.shotType === 'allRound') {
       this.allRoundShot()
+    } else if (this.shotType === 'aimBig') {
+      this.aimShot(this.baseBulletSize * 10, this.baseBulletSpeed)
     } else {
       this.aimShot()
     }
   }
 
-  aimShot() {
+  aimShot(size = this.baseBulletSize, speed = this.baseBulletSpeed) {
     const p = this.p
     const bullet = new (this.bullet())({
       x: this.x,
       y: this.y,
       angle: p.atan2(p.mouseY - this.y, p.mouseX - p.width / 2),
-      speed: this.bulletSpeed,
+      speed,
+      size,
       color: '#de9610',
     })
     this.bullets.push(bullet)
   }
 
-  allRoundShot() {
+  allRoundShot(size = this.baseBulletSize, speed = this.baseBulletSpeed) {
     const p = this.p
 
     for (let angle = 0; angle < p.TWO_PI; angle += 0.2) {
@@ -68,28 +73,29 @@ class Enemy {
         x: this.x,
         y: this.y,
         angle,
-        speed: this.bulletSpeed,
-        color: '#fff001',
+        speed,
+        size,
+        color: '#65ace4',
       })
       this.bullets.push(bullet)
     }
   }
 
-  nWayShot(n = 3) {
+  nWayShot(n = 3, size = this.baseBulletSize, speed = this.baseBulletSpeed) {
     const p = this.p
     const baseAngle = p.atan2(p.mouseY - this.y, p.mouseX - p.width / 2)
     const dir = [-1, 1]
 
     for (let i = 0; i < n; i++) {
-      const n = i === 0 ? 1 : 2
-      for (let j = 0; j < n; j++) {
+      for (let j = 0; j < (i === 0 ? 1 : 2); j++) {
         const angle = baseAngle + 0.1 * i * dir[j]
         const bullet = new (this.bullet())({
           x: this.x,
           y: this.y,
           angle,
-          speed: this.bulletSpeed,
-          color: '#d06d8c',
+          speed,
+          size,
+          color: '#f2cf01',
         })
         this.bullets.push(bullet)
       }
@@ -117,7 +123,7 @@ class Enemy {
   }
 
   draw() {
-    this.p.fill(240)
+    this.p.fill('#c93a40')
     this.p.rect(this.x - 5, this.y - 5, 10, 10)
     this.bullets.forEach((v) => v.draw(this.p))
   }
@@ -144,7 +150,7 @@ class Bullet {
     this.y = param.y
     this.angle = param.angle
     this.speed = param.speed
-    this.size = param.size || 10
+    this.size = param.size || 8
     this.color = param.color || '#FFFFFF'
   }
 
@@ -154,41 +160,59 @@ class Bullet {
   }
 
   draw(p: p5Types) {
+    p.noStroke()
     p.fill(this.color)
     p.circle(this.x, this.y, this.size)
   }
 }
 
+class Own {
+  x: number
+  y: number
+  p: p5Types
+
+  constructor(x: number, y: number, p: p5Types) {
+    this.x = x
+    this.y = y
+    this.p = p
+  }
+
+  draw() {
+    this.p.fill('#56a764')
+    this.p.rect(this.p.mouseX - 5, this.p.mouseY - 10, 10, 10)
+  }
+}
+
 let dark = false
 let enemy: Enemy
-const shotTypes = ['aim', 'nWay', 'allRound']
-let currentShotTypeId = 0
+let own: Own
+const shotTypes = ['aim', '3Way', '5way', 'allRound', 'aimBig']
 
 export function setup(p: p5Types, canvasParentRef: Element) {
   p.createCanvas(p.windowWidth, p.windowHeight).parent(canvasParentRef)
-  currentShotTypeId = Math.floor(p.random(0, 2))
   enemy = new Enemy({
     x: p.width / 2,
     y: p.height / 5,
     p,
-    shotType: shotTypes[currentShotTypeId],
+    shotType: p.random(shotTypes),
   })
+  own = new Own(p.width / 2, p.height - 10, p)
 }
 
 export function draw(p: p5Types) {
   p.clear()
   p.background(dark ? 40 : 240)
 
-  if (p.frameCount % 400 === 0) {
-    currentShotTypeId++
-    currentShotTypeId %= shotTypes.length
-    enemy.shotType = shotTypes[currentShotTypeId]
+  if (p.frameCount % 200 === 0) {
+    enemy.shotType = p.random(shotTypes)
   }
 
-  if (p.frameCount % 10 === 0) enemy.shoot()
+  if (p.frameCount % (enemy.shotType === 'aimBig' ? 20 : 10) === 0)
+    enemy.shoot()
 
   enemy.update()
   enemy.draw()
+  own.draw()
 }
 
 export function mouseClicked() {
