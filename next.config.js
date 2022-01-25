@@ -16,6 +16,7 @@ const SKETCH_SORT_ORDER = [
   'heat_map',
   'particle',
   'bullet',
+  'bouncing_ball',
 ]
 
 function getSketchFileNames() {
