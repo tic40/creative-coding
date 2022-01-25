@@ -108,7 +108,7 @@ function init() {
   for (let i = 0; i < n; i++) {
     const ball = new Ball({
       x: gp.random(gp.width),
-      y: gp.random(-gp.width * 2, 0),
+      y: gp.random(-gp.width, 0),
       vx: gp.random(-3, 3),
       vy: gp.random(0.1, 5),
       r: gp.random([6, 8, 10, 12, 14, 16, 18, 20]),
