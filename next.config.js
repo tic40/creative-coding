@@ -17,6 +17,7 @@ const SKETCH_SORT_ORDER = [
   'particle',
   'bullet',
   'bouncing_ball',
+  'koch_curve',
 ]
 
 function getSketchFileNames() {
