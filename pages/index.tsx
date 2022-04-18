@@ -19,17 +19,17 @@ const Home: NextPage = () => {
             <a>{process.env.siteName}</a>
           </Link>
         </h1>
-        <ul className="my-4">
+        <div className="my-5 flex-wrap flex gap-3">
           {sketchFileNames.map((name: string) => {
             return (
-              <li key={`sketch-${name}`}>
+              <div key={`sketch-${name}`}>
                 <Link href={`/sketches/${name}`}>
-                  <a className="link text-xl"> {name} </a>
+                  <a className="bg-transparent text-blue-700 py-1 px-3 border border-blue-500 rounded"> {name} </a>
                 </Link>
-              </li>
+              </div>
             )
           })}
-        </ul>
+        </div>
         <footer>
           <a
             href="https://github.com/tic40/creative-coding"
