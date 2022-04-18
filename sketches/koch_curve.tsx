@@ -7,7 +7,7 @@ interface Point {
 let p: p5Types
 let depth: number
 let t: number
-const MAX_DEPTH = 8
+const MAX_DEPTH = 5
 let memo: { a: Point; b: Point }[][] = []
 
 export function setup(_p: p5Types, canvasParentRef: Element) {
