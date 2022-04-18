@@ -7,7 +7,7 @@ interface Point {
 let p: p5Types
 let depth: number
 let t: number
-const maxDepth = 5
+const MAX_DEPTH = 8
 let memo: { a: Point; b: Point }[][] = []
 
 export function setup(_p: p5Types, canvasParentRef: Element) {
@@ -17,12 +17,14 @@ export function setup(_p: p5Types, canvasParentRef: Element) {
   p.stroke(0)
   p.noFill()
 
-  ;(t = 0), (depth = 3)
+  t = 0
+  depth = 3
   memo = []
+
   const a = { x: 0, y: (p.height / 4) * 3 }
   const b = { x: p.width, y: (p.height / 4) * 3 }
 
-  for (let i = 1; i <= maxDepth; i++) {
+  for (let i = 1; i <= MAX_DEPTH; i++) {
     memo[i] = []
     koch(i, a, b, i)
   }
@@ -60,7 +62,9 @@ export function draw(p: p5Types) {
 }
 
 export function mouseClicked() {
-  depth = maxDepth <= depth ? 1 : depth + 1
+  depth = MAX_DEPTH <= depth ? 1 : depth + 1
   t = 0
   p.clear()
+  p.stroke(0)
+  p.noFill()
 }
