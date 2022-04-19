@@ -24,7 +24,10 @@ const Home: NextPage = () => {
             return (
               <div key={`sketch-${name}`}>
                 <Link href={`/sketches/${name}`}>
-                  <a className="bg-transparent text-blue-700 py-1 px-3 border border-blue-500 rounded"> {name} </a>
+                  <a className="bg-transparent text-blue-700 py-1 px-3 border border-blue-500 rounded">
+                    {' '}
+                    {name}{' '}
+                  </a>
                 </Link>
               </div>
             )
