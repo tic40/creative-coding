@@ -19,6 +19,7 @@ const SKETCH_SORT_ORDER = [
   'bouncing_ball',
   'koch_curve',
   'sierpinski_gasket',
+  'l_system_tree',
 ]
 
 function getSketchFileNames() {
