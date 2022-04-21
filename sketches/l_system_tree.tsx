@@ -33,12 +33,22 @@ function addCommand(
 
 function createData(): Data {
   // TODO: 他のバリエーション
+  const { length, depth } = p.random([
+    { length: 1, depth: 8 },
+    { length: 2, depth: 7 },
+    { length: 2, depth: 6 },
+    { length: 3, depth: 6 },
+    { length: 3, depth: 5 },
+    { length: 4, depth: 5 },
+    { length: 5, depth: 5 },
+  ])
+
   const r = ['F-[[X]+X]+F[+FX]-X']
   return {
     start: 'X',
     rules: { X: r[0], F: 'FF' },
-    length: Math.floor(p.random(3, 6)),
-    depth: 6,
+    length: length,
+    depth: depth,
     x: p.width / 2,
     y: p.height,
     startAngle: -90,
@@ -72,8 +82,8 @@ function init() {
         if (d) [angle, x, y] = [d.angle, d.x, d.y]
         break
       case 'F':
-        const tx = x + ((p.cos(angle) * data.length) / 5) * p.random([3, 5])
-        const ty = y + ((p.sin(angle) * data.length) / 5) * p.random([3, 5])
+        const tx = x + (p.cos(angle) * data.length)
+        const ty = y + (p.sin(angle) * data.length)
         drawData.push({ x, y, tx, ty })
         x = tx
         y = ty
@@ -101,7 +111,14 @@ export function draw(p: p5Types) {
   p.noFill()
 
   console.log(drawData.length)
-  for (let i = 0; i < (1000 < drawData.length ? 40 : 10); i++) {
+
+  const len = drawData.length
+  let speed = 10
+  if (10000 < len) speed = 500
+  else if (5000 < len) speed = 100
+  else if (1000 < len) speed = 50
+
+  for (let i = 0; i < speed; i++) {
     if (drawData.length == 0) return
     const d = drawData.shift()
     if (d) {
