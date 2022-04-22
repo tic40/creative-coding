@@ -20,7 +20,7 @@ const SKETCH_SORT_ORDER = [
   'koch_curve',
   'sierpinski_gasket',
   'l_system_tree',
-  'space_filling_curve'
+  'space_filling_curve',
 ]
 
 function getSketchFileNames() {

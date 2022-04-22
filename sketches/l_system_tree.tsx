@@ -103,7 +103,10 @@ function init(p: p5Types) {
 
   const data = {
     start: 'X',
-    rules: { X: p.random(['F-[[X]+X]+F[+FX]-X', 'F+[[X]-X]-F[-FX]+X']), F: 'FF' },
+    rules: {
+      X: p.random(['F-[[X]+X]+F[+FX]-X', 'F+[[X]-X]-F[-FX]+X']),
+      F: 'FF',
+    },
     length: length,
     depth: depth,
     x: p.width / 2,
