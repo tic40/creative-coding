@@ -55,11 +55,8 @@ class LSystem {
           x = tx
           y = ty
           break
-        case 'X':
-          // do nothing
-          break
         default:
-          console.error(`illegal command: ${c}`)
+          // do nothing
           break
       }
     }
@@ -77,8 +74,7 @@ class LSystem {
 
   draw(steps: number): void {
     const p = this.p
-    p.stroke('#42692F')
-    p.noFill()
+    p.stroke(0)
 
     for (let i = 0; i < steps; i++) {
       if (this.drawData.length == 0) return
@@ -91,25 +87,15 @@ class LSystem {
 let lSystem: LSystem
 
 function init(p: p5Types) {
-  const { length, depth } = p.random([
-    { length: 1, depth: 8 },
-    { length: 2, depth: 7 },
-    { length: 2, depth: 6 },
-    { length: 3, depth: 6 },
-    { length: 3, depth: 5 },
-    { length: 4, depth: 5 },
-    { length: 5, depth: 5 },
-  ])
-
   const data = {
     start: 'X',
-    rules: { X: p.random(['F-[[X]+X]+F[+FX]-X', 'F+[[X]-X]-F[-FX]+X']), F: 'FF' },
-    length: length,
-    depth: depth,
-    x: p.width / 2,
-    y: p.height,
-    startAngle: -90,
-    angle: p.random(20, 25),
+    rules: { X: '+YF-XFX-FY+', Y: '-XF+YFY+FX-' },
+    length: 5,
+    depth: 6,
+    x: 10,
+    y: 10,
+    startAngle: 90,
+    angle: 90,
   }
 
   lSystem = new LSystem(data, p)
@@ -122,11 +108,13 @@ export function setup(p: p5Types, canvasParentRef: Element) {
 }
 
 export function draw(p: p5Types) {
+  p.stroke(0)
+  p.noFill()
+
   const len = lSystem.drawData.length
   let steps = 10
-  if (10000 < len) steps = 500
-  else if (5000 < len) steps = 100
-  else if (1000 < len) steps = 50
+  if (5000 < len) steps = 50
+  else if (1000 < len) steps = 25
   lSystem.draw(steps)
 }
 
