@@ -21,6 +21,7 @@ const SKETCH_SORT_ORDER = [
   'sierpinski_gasket',
   'l_system_tree',
   'space_filling_curve',
+  'life_game',
 ]
 
 function getSketchFileNames() {
