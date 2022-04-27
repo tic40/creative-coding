@@ -6,42 +6,48 @@ type valueOf<T> = T[keyof T]
 type Board = valueOf<typeof CellType>[][]
 const cellSize = 10
 const buttonStyle =
-  'background: #4CAF50; opacity: 0.8; color: white; padding: 8px; border: none;'
+  'background: #4CAF50; opacity: 0.9; color: white; padding: 6px; border: 1px solid #FFF;'
 
 let cellWidth: number
 let cellHeight: number
 let board: Board
 let drawBoard: Board
-let speed = 0
+let speed = 1
 let pause = 1
+
+let pauseButton: p5Types.Element
+let clearButton: p5Types.Element
+let randomButton: p5Types.Element
+let stepButton: p5Types.Element
+let speedButton: p5Types.Element
 
 export function setup(p: p5Types, canvasParentRef: Element) {
   p.createCanvas(p.windowWidth, p.windowHeight).parent(canvasParentRef)
 
-  const startBtn = p.createButton('Start')
-  startBtn.position(0, 0)
-  startBtn.mousePressed(start)
-  startBtn.style(buttonStyle)
+  pauseButton = p.createButton('Start')
+  pauseButton.position(5, 5)
+  pauseButton.mousePressed(togglePause)
+  pauseButton.style(buttonStyle)
 
-  const stopBtn = p.createButton('Stop')
-  stopBtn.position(0, 50)
-  stopBtn.mousePressed(stop)
-  stopBtn.style(buttonStyle)
+  clearButton = p.createButton('Clear')
+  clearButton.position(5, 55)
+  clearButton.mousePressed(() => initBoard(p))
+  clearButton.style(buttonStyle)
 
-  const clearBtn = p.createButton('Clear')
-  clearBtn.position(0, 100)
-  clearBtn.mousePressed(() => initBoard(p))
-  clearBtn.style(buttonStyle)
+  randomButton = p.createButton('Random')
+  randomButton.position(5, 105)
+  randomButton.mousePressed(() => randomBoard(p))
+  randomButton.style(buttonStyle)
 
-  const randomBtn = p.createButton('Random')
-  randomBtn.position(0, 150)
-  randomBtn.mousePressed(() => randomBoard(p))
-  randomBtn.style(buttonStyle)
+  stepButton = p.createButton('Step')
+  stepButton.position(5, 155)
+  stepButton.mousePressed(() => proceed(p))
+  stepButton.style(buttonStyle)
 
-  const changeSpeedBtn = p.createButton('Change speed')
-  changeSpeedBtn.position(0, 200)
-  changeSpeedBtn.mousePressed(toggleSpeed)
-  changeSpeedBtn.style(buttonStyle)
+  speedButton = p.createButton('Fast')
+  speedButton.position(5, 205)
+  speedButton.mousePressed(toggleSpeed)
+  speedButton.style(buttonStyle)
 
   initBoard(p)
   randomBoard(p)
@@ -103,14 +109,12 @@ function drawCurrentBoard(p: p5Types) {
 
 function toggleSpeed() {
   speed ^= 1
+  speedButton.html(speed ? 'Fast' : 'Slow')
 }
 
-function stop() {
-  pause = 1
-}
-
-function start() {
-  pause = 0
+function togglePause() {
+  pause ^= 1
+  pauseButton.html(pause ? 'Start' : 'Stop')
 }
 
 function initBoard(p: p5Types) {
