@@ -13,7 +13,7 @@ interface Point {
   x: number
   y: number
 }
-const cellSize = 10
+let cellSize = 12
 const buttonStyle =
   'background: #4CAF50; opacity: 0.9; color: white; padding: 6px; border: 1px solid #FFF;'
 const moves = [
@@ -30,6 +30,8 @@ let start: Point
 let goal: Point
 
 let solveButton: p5Types.Element
+let sizeUpButton: p5Types.Element
+let sizeDownButton: p5Types.Element
 let dist: number[][]
 let path: Point[]
 let solved: boolean
@@ -44,6 +46,24 @@ export function setup(p: p5Types, canvasParentRef: Element) {
     solveButton.html(solved ? 'Reset' : 'Solve')
   })
   solveButton.style(buttonStyle)
+
+  sizeUpButton = p.createButton('＋')
+  sizeUpButton.position(64, 5)
+  sizeUpButton.mousePressed(() => {
+    if (cellSize === 2) return
+    cellSize-=2
+    init(p)
+  })
+  sizeUpButton.style(buttonStyle)
+
+  sizeDownButton = p.createButton('ー')
+  sizeDownButton.position(96, 5)
+  sizeDownButton.mousePressed(() => {
+    if (cellSize === 30) return
+    cellSize += 2
+    init(p)
+  })
+  sizeDownButton.style(buttonStyle)
 
   init(p)
 }
@@ -117,6 +137,7 @@ function drawCell(p: p5Types, x: number, y: number, color: string) {
   const tx = x * cellSize
   const ty = y * cellSize
   p.fill(color)
+  p.noStroke()
   p.rect(tx, ty, cellSize, cellSize)
 }
 
