@@ -22,6 +22,7 @@ const SKETCH_SORT_ORDER = [
   'l_system_tree',
   'space_filling_curve',
   'life_game',
+  'maze',
 ]
 
 function getSketchFileNames() {
