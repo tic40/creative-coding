@@ -51,7 +51,7 @@ export function setup(p: p5Types, canvasParentRef: Element) {
   sizeUpButton.position(64, 5)
   sizeUpButton.mousePressed(() => {
     if (cellSize === 2) return
-    cellSize-=2
+    cellSize -= 2
     init(p)
   })
   sizeUpButton.style(buttonStyle)
