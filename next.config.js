@@ -7,7 +7,6 @@ const SKETCH_SORT_ORDER = [
   'kaiten_sushi',
   'dots',
   'planet',
-  'rectangle_fish',
   'lissajous_curve',
   'circular',
   'bounce',
