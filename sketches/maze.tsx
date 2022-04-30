@@ -154,14 +154,14 @@ function decideStartAndGoal(p: p5Types) {
   while (1) {
     start = {
       x: p.floor(p.random(1, cellWidth - 2)),
-      y: p.floor(p.random(1, cellHeight - 1)),
+      y: p.floor(p.random(1, cellHeight - 2)),
     }
     if (board[start.y][start.x] === CellType.floor) break
   }
   while (1) {
     goal = {
       x: p.floor(p.random(1, cellWidth - 2)),
-      y: p.floor(p.random(1, cellHeight - 1)),
+      y: p.floor(p.random(1, cellHeight - 2)),
     }
     if (board[goal.y][goal.x] === CellType.floor && !isStart(goal.x, goal.y))
       break
