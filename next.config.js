@@ -1,7 +1,7 @@
 const SKETCH_SORT_ORDER = [
   'circle',
-  'circle_random',
-  'linear',
+  'bubble1',
+  'bubble2',
   'easing',
   'sushi',
   'kaiten_sushi',
