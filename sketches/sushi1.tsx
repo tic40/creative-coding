@@ -5,11 +5,8 @@ let img: p5Types.Image
 let t: number
 let size: number
 
-export function preload(p: p5Types) {
-  img = p.loadImage(IMAGE_PATH)
-}
-
 export function setup(p: p5Types, canvasParentRef: Element) {
+  img = p.loadImage(IMAGE_PATH)
   p.createCanvas(p.windowWidth, p.windowHeight).parent(canvasParentRef)
   p.imageMode(p.CENTER)
   size = Math.min(p.height, p.width) / 4
@@ -37,6 +34,7 @@ export function draw(p: p5Types) {
 
 export function mouseClicked(p: p5Types) {
   t = 0
-  size *= 0.85
+  size *= 2 / 3
+  console.log(size)
   if (size < 5) size = Math.min(p.height, p.width) / 4
 }
