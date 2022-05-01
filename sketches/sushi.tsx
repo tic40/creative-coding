@@ -2,9 +2,8 @@ import p5Types from 'p5'
 
 const IMAGE_PATH = '../sushi/sushi_oke_nigiri.png'
 let img: p5Types.Image
-let t = 0
-const DEFAULT_NUM = 2
-let num = DEFAULT_NUM
+let t: number
+let size: number
 
 export function preload(p: p5Types) {
   img = p.loadImage(IMAGE_PATH)
@@ -13,31 +12,31 @@ export function preload(p: p5Types) {
 export function setup(p: p5Types, canvasParentRef: Element) {
   p.createCanvas(p.windowWidth, p.windowHeight).parent(canvasParentRef)
   p.imageMode(p.CENTER)
+  size = 100
+  t = 0
 }
 
 export function draw(p: p5Types) {
-  t += 1
-  if (t <= 100) {
-    p.clear()
+  if (100 < t) return
+  t++
+  p.clear()
 
-    const w = p.width / num
-    const h = img.height * (w / img.width)
-    let x = w / 2
-    let y = h / 2
-
-    while (y <= p.height) {
-      for (let i = 0; i < num; i++) {
-        const nx = x + w * i
-        p.image(img, nx, y, w * (t / 100), h * (t / 100))
-      }
-      y += h
+  const currentSize = p.lerp(1, size, t / 100)
+  for (let i = 0; i < p.height / size; i++) {
+    for (let j = 0; j < p.width / size; j++) {
+      p.image(
+        img,
+        j * size - size / 2,
+        i * size - size / 2,
+        currentSize,
+        currentSize
+      )
     }
-    return
   }
 }
 
-export function mouseClicked(p: p5Types) {
+export function mouseClicked() {
   t = 0
-  num = Math.floor(num * 1.5)
-  if (50 < num) num = DEFAULT_NUM
+  size -= 5
+  if (size <= 0) size = 100
 }

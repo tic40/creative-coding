@@ -1,6 +1,6 @@
 import p5Types from 'p5'
 
-let n: number
+const n = 2
 let circles: {
   x: number
   y: number
@@ -11,7 +11,6 @@ let circles: {
 export function setup(p: p5Types, canvasParentRef: Element) {
   p.createCanvas(p.windowWidth, p.windowHeight).parent(canvasParentRef)
 
-  n = 2
   circles = []
   for (let i = 0; i < 100; i++) circles.push(createCircle(p))
 }
@@ -23,13 +22,15 @@ export function draw(p: p5Types) {
     v.x += v.vector.x
     v.y += v.vector.y
   }
+  for (let i = 0; i < n; i++) circles.push(createCircle(p))
 
   circles = circles.filter((v) => {
-    if (v.x + v.size / 2 < 0 || p.width < v.x + v.size / 2) return false
-    if (v.y + v.size / 2 < 0 || p.height < v.y + v.size / 2) return false
+    if (v.x + v.size / 2 < 0 || p.width < v.x - v.size / 2) return false
+    if (v.y + v.size / 2 < 0 || p.height < v.y - v.size / 2) return false
+    if (v.vector.mag() === 0) return false
     return true
   })
-  for (let i = 0; i < n; i++) circles.push(createCircle(p))
+
   for (const v of circles) p.circle(v.x, v.y, v.size)
 }
 
@@ -40,8 +41,4 @@ function createCircle(p: p5Types) {
     size: p.random(10, 30),
     vector: p.createVector(p.random(-2, 2), p.random(-2, 2)),
   }
-}
-
-export function mouseClicked() {
-  n = n < 10 ? n + 2 : 2
 }
