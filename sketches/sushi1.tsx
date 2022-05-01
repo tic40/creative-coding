@@ -12,7 +12,7 @@ export function preload(p: p5Types) {
 export function setup(p: p5Types, canvasParentRef: Element) {
   p.createCanvas(p.windowWidth, p.windowHeight).parent(canvasParentRef)
   p.imageMode(p.CENTER)
-  size = 100
+  size = Math.min(p.height, p.width) / 4
   t = 0
 }
 
@@ -22,8 +22,8 @@ export function draw(p: p5Types) {
   p.clear()
 
   const currentSize = p.lerp(1, size, t / 100)
-  for (let i = 0; i < p.height / size; i++) {
-    for (let j = 0; j < p.width / size; j++) {
+  for (let i = 0; i < p.height / size + 1; i++) {
+    for (let j = 0; j < p.width / size + 1; j++) {
       p.image(
         img,
         j * size - size / 2,
@@ -35,8 +35,8 @@ export function draw(p: p5Types) {
   }
 }
 
-export function mouseClicked() {
+export function mouseClicked(p: p5Types) {
   t = 0
-  size -= 5
-  if (size <= 0) size = 100
+  size *= 0.85
+  if (size < 5) size = Math.min(p.height, p.width) / 4
 }

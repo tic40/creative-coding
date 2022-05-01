@@ -3,7 +3,7 @@ const SKETCH_SORT_ORDER = [
   'bubble1',
   'bubble2',
   'easing',
-  'sushi',
+  'sushi1',
   'kaiten_sushi',
   'dots',
   'planet',
