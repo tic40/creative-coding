@@ -38,7 +38,7 @@ function createCircle(p: p5Types) {
   return {
     x: p.random(50, p.width - 50),
     y: p.random(50, p.height - 50),
-    size: p.random(10, 30),
+    size: p.random(5, 30),
     vector: p.createVector(p.random(-2, 2), p.random(-2, 2)),
   }
 }
