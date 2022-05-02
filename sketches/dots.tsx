@@ -13,7 +13,6 @@ export function setup(p: p5Types, canvasParentRef: Element) {
 export function draw(p: p5Types) {
   const t = p.frameCount % space
   p.clear()
-  p.background(0)
   p.noStroke()
   const maxDist = p.dist(0, 0, p.width / 2, p.height / 2)
 
