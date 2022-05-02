@@ -17,8 +17,8 @@ export function draw(p: p5Types) {
   p.noStroke()
   const maxDist = p.dist(0, 0, p.width / 2, p.height / 2)
 
-  for (let y = -1; y < n+2; y++) {
-    for (let x = 0; x < n+2; x++) {
+  for (let y = -1; y < n + 2; y++) {
+    for (let x = 0; x < n + 2; x++) {
       const tx = space * x
       const ty = space * y
 
