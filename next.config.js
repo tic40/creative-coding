@@ -4,7 +4,7 @@ const SKETCH_SORT_ORDER = [
   'bubble2',
   'easing',
   'sushi1',
-  'kaiten_sushi',
+  'sushi2',
   'dots',
   'planet',
   'lissajous_curve',
