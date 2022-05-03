@@ -1,59 +1,49 @@
 import p5Types from 'p5'
 import { easingsFunctions, easingsFunctionNames } from '../utils/easings'
 
-let x = 0
-let t = 0
+let t: number
 let start: number
 let end: number
-let currentEasingName: string
 let buttons: p5Types.Element[]
+let idx: number
 
 export function setup(p: p5Types, canvasParentRef: Element) {
   p.createCanvas(p.windowWidth, p.windowHeight).parent(canvasParentRef)
+
   buttons = []
   easingsFunctionNames.forEach((v, i) => {
     const btn = p.createButton(v)
-    btn.position(10, 16 * (i + 1))
+    btn.position(10, 18 * i)
     btn.mouseClicked(() => {
-      currentEasingName = v
+      idx = i
       t = 0
     })
     buttons[i] = btn
   })
 
-  start = p.height - p.height / 10
-  end = p.height / 10
-  x = p.width / 2
-  setRandomEasingsFunctions()
+  t = 0
+  start = p.height / 10
+  end = p.height - p.height / 10
+  idx = 0
+  p.stroke(0)
+  p.strokeWeight(2)
 }
 
 export function draw(p: p5Types) {
-  t += 1
+  t++
   if (t >= 140) {
     t = 0
-    ;[start, end] = [end, start]
-    setRandomEasingsFunctions()
+    idx = (idx + 1) % easingsFunctionNames.length
     return
   }
   if (t > 100) return
 
   p.clear()
-  p.strokeWeight(0)
-  easingsFunctionNames.forEach((v, i) => {
+  const currentEasingName = easingsFunctionNames[idx]
+  easingsFunctionNames.forEach((v, i) =>
     buttons[i].style(`color: ${v == currentEasingName ? 'red' : '#000'}`)
-  })
+  )
 
-  p.strokeWeight(5)
-  p.stroke(0)
-  p.line(x, start, x, end)
-  p.stroke('red')
   const d = p.lerp(start, end, easingsFunctions[currentEasingName](t / 100))
-  p.line(x + 40, d, x - 40, d)
-}
-
-function setRandomEasingsFunctions(): void {
-  currentEasingName =
-    easingsFunctionNames[
-      Math.floor(Math.random() * easingsFunctionNames.length)
-    ]
+  p.circle(p.width / 2, d, 80)
 }
