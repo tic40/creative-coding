@@ -32,7 +32,7 @@ export function draw(p: p5Types) {
 
   if (p.frameCount % 2 === 0 && p.random([false, true])) addParticles(p)
 
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 4; i++) {
     particles.forEach((v) => {
       v.angle += 0.5
       v.nx++
