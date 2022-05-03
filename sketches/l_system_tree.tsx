@@ -77,7 +77,6 @@ class LSystem {
 
   draw(steps: number): void {
     const p = this.p
-    p.stroke('#42692F')
     p.noFill()
 
     for (let i = 0; i < steps; i++) {
