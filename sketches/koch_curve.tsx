@@ -7,7 +7,7 @@ interface Point {
 let p: p5Types
 let depth: number
 let t: number
-const MAX_DEPTH = 5
+const MAX_DEPTH = 6
 let memo: { a: Point; b: Point }[][] = []
 
 export function setup(_p: p5Types, canvasParentRef: Element) {
@@ -55,16 +55,16 @@ function lerp2d(a: Point, b: Point, t: number) {
 }
 
 export function draw(p: p5Types) {
-  if (memo[depth].length <= t) return
-  const { a, b } = memo[depth][t]
-  p.line(a.x, a.y, b.x, b.y)
-  t++
+  for (let i = 0; i < depth; i++) {
+    if (memo[depth].length <= t) return
+    const { a, b } = memo[depth][t]
+    p.line(a.x, a.y, b.x, b.y)
+    t++
+  }
 }
 
 export function mouseClicked() {
   depth = MAX_DEPTH <= depth ? 1 : depth + 1
   t = 0
   p.clear()
-  p.stroke(0)
-  p.noFill()
 }
