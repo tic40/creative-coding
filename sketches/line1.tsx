@@ -58,9 +58,9 @@ let b: Point
 let color: Rgb
 
 function randomColor(p: p5Types) {
-  color.r += p.random([-2, 2])
-  color.g += p.random([-2, 2])
-  color.b += p.random([-2, 2])
+  color.r += p.random([-5, 5])
+  color.g += p.random([-5, 5])
+  color.b += p.random([-5, 5])
 
   color.r = p.constrain(color.r, 0, 255)
   color.g = p.constrain(color.g, 0, 255)
