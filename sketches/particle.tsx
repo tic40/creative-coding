@@ -13,10 +13,21 @@ const colors = [
   '#9460a0',
   '#cc528b',
   '#f2cf01',
-]
-const types = ['circle', 'rect', 'triangle']
-let particles: any[]
-let rparticles: any[]
+] as const
+const types = ['circle', 'rect', 'triangle'] as const
+interface Particle {
+  sx: number
+  sy: number
+  nx: number
+  ny: number
+  r: number
+  angle: number
+  sw: number
+  type: typeof types[number]
+  color: typeof colors[number]
+}
+let particles: Particle[]
+let rparticles: Particle[]
 
 export function setup(p: p5Types, canvasParentRef: Element) {
   p.createCanvas(p.windowWidth, p.windowHeight).parent(canvasParentRef)
@@ -29,7 +40,6 @@ export function setup(p: p5Types, canvasParentRef: Element) {
 
 export function draw(p: p5Types) {
   p.clear()
-
   if (p.frameCount % 2 === 0 && p.random([false, true])) addParticles(p)
 
   for (let i = 0; i < 4; i++) {
@@ -45,34 +55,9 @@ export function draw(p: p5Types) {
     })
   }
 
-  rparticles.forEach((v) => {
-    p.push()
-    p.translate(v.nx, v.ny)
-    p.rotate(v.angle)
-    p.fill(v.color)
-    if (v.type === 'circle') {
-      p.circle(0, 0, v.r)
-    } else if (v.type === 'triangle') {
-      p.triangle(0, 0, v.r, 0, 0, v.r)
-    } else {
-      p.rect(0, 0, v.r, v.r)
-    }
-    p.pop()
-  })
-
+  rparticles.forEach((v) => drawParticle(p, v))
   particles.forEach((v) => {
-    p.push()
-    p.translate(v.nx, v.ny)
-    p.rotate(v.angle)
-    p.fill(v.color)
-    if (v.type === 'circle') {
-      p.circle(0, 0, v.r)
-    } else if (v.type === 'triangle') {
-      p.triangle(0, 0, v.r, 0, 0, v.r)
-    } else {
-      p.rect(0, 0, v.r, v.r)
-    }
-    p.pop()
+    drawParticle(p, v)
     if (p.width < v.nx) {
       rparticles.push({ ...v, sy: p.height / 5, sw: v.sw / 5, r: v.r / 5 })
     }
@@ -80,6 +65,21 @@ export function draw(p: p5Types) {
 
   particles = particles.filter((v) => v.nx <= p.width)
   rparticles = rparticles.filter((v) => 0 <= v.nx)
+}
+
+function drawParticle(p: p5Types, v: Particle) {
+  p.push()
+  p.translate(v.nx, v.ny)
+  p.rotate(v.angle)
+  p.fill(v.color)
+  if (v.type === 'circle') {
+    p.circle(0, 0, v.r)
+  } else if (v.type === 'triangle') {
+    p.triangle(0, 0, v.r, 0, 0, v.r)
+  } else {
+    p.rect(0, 0, v.r, v.r)
+  }
+  p.pop()
 }
 
 function addParticles(p: p5Types) {
@@ -92,8 +92,8 @@ function addParticles(p: p5Types) {
       r: p.random(5, 18),
       angle: p.random(1, 30) + (p.frameCount % 360),
       sw: p.random(50, 150),
-      type: p.random(types),
-      color: p.random(colors),
+      type: p.random([...types]),
+      color: p.random([...colors]),
     })
   }
 }
