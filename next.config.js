@@ -14,7 +14,7 @@ const SKETCH_SORT_ORDER = [
   'koch_curve',
   'sierpinski_gasket',
   'space_filling_curve',
-  'l_system_tree',
+  'tree',
   'random_walk',
   'heat_map',
   'particle',
