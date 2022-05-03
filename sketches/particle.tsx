@@ -1,58 +1,5 @@
 import p5Types from 'p5'
 
-class Particle {
-  x: number
-  y: number
-  vector: p5Types.Vector
-  r: number
-  life: number
-  color: string
-  type: string
-
-  constructor(
-    x: number,
-    y: number,
-    vector: p5Types.Vector,
-    r: number,
-    color: string,
-    type: string
-  ) {
-    this.x = x
-    this.y = y
-    this.vector = vector
-    this.r = r
-    this.life = 500
-    this.color = color
-    this.type = type
-  }
-
-  update() {
-    this.x += this.vector.x
-    this.y += this.vector.y
-    this.life--
-  }
-
-  draw(p: p5Types) {
-    p.fill(this.color)
-    if (this.type === 'rect') {
-      p.rect(this.x, this.y, this.r * 2, this.r * 2, 2)
-    } else if (this.type === 'triangle') {
-      p.triangle(
-        this.x,
-        this.y,
-        this.x + this.r,
-        this.y - this.r * 1.5,
-        this.x + this.r * 2,
-        this.y
-      )
-    } else {
-      p.circle(this.x, this.y, this.r * 2)
-    }
-  }
-}
-
-let dark = false
-let particlesSet: Particle[][] = []
 const colors = [
   '#de9610',
   '#c93a40',
@@ -68,51 +15,85 @@ const colors = [
   '#f2cf01',
 ]
 const types = ['circle', 'rect', 'triangle']
+let particles: any[]
+let rparticles: any[]
 
 export function setup(p: p5Types, canvasParentRef: Element) {
   p.createCanvas(p.windowWidth, p.windowHeight).parent(canvasParentRef)
-  addParticles(p)
+  p.angleMode(p.DEGREES)
+  p.rectMode(p.CENTER)
+  p.noStroke()
+  particles = []
+  rparticles = []
 }
 
 export function draw(p: p5Types) {
   p.clear()
-  if (dark) p.background(0)
-  else p.background(250)
-  p.noStroke()
 
-  if (p.frameCount % 100 === 0) {
-    addParticles(p)
-    particlesSet = particlesSet.filter((particles) => 0 < particles[0].life)
+  if (p.frameCount % 2 === 0 && p.random([false, true])) addParticles(p)
+
+  for (let i = 0; i < 5; i++) {
+    particles.forEach((v) => {
+      v.angle += 0.5
+      v.nx++
+      v.ny = v.sy + v.sw * p.sin(v.angle)
+    })
+    rparticles.forEach((v) => {
+      v.angle += 0.5
+      v.nx -= 0.25
+      v.ny = v.sy + v.sw * p.sin(v.angle)
+    })
   }
 
-  particlesSet.forEach((particles) => {
-    particles.forEach((v) => {
-      v.update()
-      v.draw(p)
-    })
+  rparticles.forEach((v) => {
+    p.push()
+    p.translate(v.nx, v.ny)
+    p.rotate(v.angle)
+    p.fill(v.color)
+    if (v.type === 'circle') {
+      p.circle(0, 0, v.r)
+    } else if (v.type === 'triangle') {
+      p.triangle(0, 0, v.r, 0, 0, v.r)
+    } else {
+      p.rect(0, 0, v.r, v.r)
+    }
+    p.pop()
   })
-}
 
-export function mouseClicked() {
-  dark = !dark
+  particles.forEach((v) => {
+    p.push()
+    p.translate(v.nx, v.ny)
+    p.rotate(v.angle)
+    p.fill(v.color)
+    if (v.type === 'circle') {
+      p.circle(0, 0, v.r)
+    } else if (v.type === 'triangle') {
+      p.triangle(0, 0, v.r, 0, 0, v.r)
+    } else {
+      p.rect(0, 0, v.r, v.r)
+    }
+    p.pop()
+    if (p.width < v.nx) {
+      rparticles.push({ ...v, sy: p.height / 5, sw: v.sw / 5, r: v.r / 5 })
+    }
+  })
+
+  particles = particles.filter((v) => v.nx <= p.width)
+  rparticles = rparticles.filter((v) => 0 <= v.nx)
 }
 
 function addParticles(p: p5Types) {
-  const add = []
-  const center = { x: p.random(0, p.width), y: p.random(0, p.height) }
-  for (let i = 0; i < 100; i++) {
-    const vx = p.random(-5, 5)
-    const vy = p.random(-5, 5)
-    const vector = p.createVector(vx, vy)
-    const particle = new Particle(
-      center.x,
-      center.y,
-      vector,
-      p.random(5, 15),
-      p.random(colors),
-      p.random(types)
-    )
-    add.push(particle)
+  for (let i = 0; i < p.random(4, 15); i++) {
+    particles.push({
+      sx: p.random(-100, 0),
+      sy: p.random(p.height / 2, p.height / 2 + p.height / 10),
+      nx: p.random(-100, 0),
+      ny: 0,
+      r: p.random(5, 18),
+      angle: p.random(1, 30) + (p.frameCount % 360),
+      sw: p.random(50, 150),
+      type: p.random(types),
+      color: p.random(colors),
+    })
   }
-  particlesSet.push(add)
 }
