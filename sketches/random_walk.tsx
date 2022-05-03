@@ -16,7 +16,7 @@ export function draw(p: p5Types) {
   const np = nextPoint(p)
   points.push(np)
 
-  if (p.width - p.width/10 < points.length) {
+  if (p.width - p.width / 10 < points.length) {
     points.shift()
     points = points.map((v) => ({ x: v.x - 1, y: v.y }))
   }
@@ -38,6 +38,6 @@ function nextPoint(p: p5Types): Point {
   const last = points[points.length - 1]
   return {
     x: last.x + 1,
-    y: last.y + p.random(-20,20)
+    y: last.y + p.random(-20, 20),
   }
 }
