@@ -21,9 +21,9 @@ class Enemy {
   y: number
   p: p5Types
   bullets: Bullet[]
-  baseBulletSpeed: number = 5
-  baseBulletSize: number = 8
-  moveSpeed: number = 5
+  baseBulletSpeed = 5
+  baseBulletSize = 8
+  moveSpeed = 5
   destX: number
   destY: number
   shotType: string
