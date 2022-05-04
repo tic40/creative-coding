@@ -19,7 +19,7 @@ const Home: NextPage = () => {
             <a>{process.env.siteName}</a>
           </Link>
         </h1>
-        <div className="my-5 flex-wrap flex gap-3">
+        <div className="my-5 flex-wrap flex gap-4">
           {sketchFileNames.map((name: string) => {
             return (
               <div key={`sketch-${name}`}>
