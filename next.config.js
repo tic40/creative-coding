@@ -19,7 +19,7 @@ const SKETCH_SORT_ORDER = [
   'sierpinski_gasket',
   'tree',
   'heatmap',
-  'bullet',
+  'shooting',
   'life_game',
   'maze',
 ]
