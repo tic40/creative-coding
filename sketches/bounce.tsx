@@ -1,8 +1,7 @@
 import p5Types from 'p5'
 
-const n = 120
-const gravity = 0.1
-const vk = -0.8
+const gravity = 0.4
+const vk = -0.5
 let balls: Ball[]
 let gp: p5Types
 let bottomY: number
@@ -20,7 +19,7 @@ const colors = [
   '#9460a0',
   '#cc528b',
   '#f2cf01',
-]
+] as const
 
 class Ball {
   x: number
@@ -85,8 +84,9 @@ export function setup(p: p5Types, canvasParentRef: Element) {
 export function draw(p: p5Types) {
   p.clear()
 
-  p.fill(220)
-  p.rect(0, bottomY, p.width, bottomY)
+  p.stroke(0)
+  p.strokeWeight(4)
+  p.line(0, bottomY, p.width, bottomY)
 
   p.noStroke()
   balls.forEach((ball) => {
@@ -96,23 +96,23 @@ export function draw(p: p5Types) {
 }
 
 export function mouseClicked() {
-  balls.forEach((ball) => {
-    ball.vy = gp.random(-8, -4)
-  })
+  if (bottomY === Infinity) init()
+  else bottomY = Infinity
 }
 
 function init() {
   balls = []
+  const n = gp.width / 5
   bottomY = gp.height - gp.height / 10
 
   for (let i = 0; i < n; i++) {
     const ball = new Ball({
       x: gp.random(gp.width),
-      y: gp.random(-gp.width, 0),
+      y: gp.random(-gp.height * 2, -gp.height / 10),
       vx: gp.random(-3, 3),
       vy: gp.random(0.1, 5),
-      r: gp.random([6, 8, 10, 12, 14, 16, 18, 20]),
-      color: gp.random(colors),
+      r: gp.random([6, 8, 10, 12, 14, 16, 18]),
+      color: gp.random([...colors]),
     })
     balls.push(ball)
   }

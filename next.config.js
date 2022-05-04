@@ -9,6 +9,7 @@ const SKETCH_SORT_ORDER = [
   'line1',
   'easing',
   'dots',
+  'bounce',
   'random_walk',
   'particle',
   'planet',
@@ -19,7 +20,6 @@ const SKETCH_SORT_ORDER = [
   'tree',
   'heatmap',
   'bullet',
-  'bouncing_ball',
   'life_game',
   'maze',
 ]
