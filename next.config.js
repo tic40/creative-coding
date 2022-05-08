@@ -22,6 +22,7 @@ const SKETCH_SORT_ORDER = [
   'shooting',
   'life_game',
   'maze',
+  'sphere1',
 ]
 
 function getSketchFileNames() {
