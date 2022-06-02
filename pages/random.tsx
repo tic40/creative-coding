@@ -19,8 +19,8 @@ const Random: NextPage = () => {
   return (
     <>
       <Meta
-        title={`${name} | ${process.env.siteName}`}
-        description={`${name} | ${process.env.siteName}`}
+        title={`random | ${process.env.siteName}`}
+        description={`random | ${process.env.siteName}`}
       />
       <div className="sketch-holder">
         <ReactP5
