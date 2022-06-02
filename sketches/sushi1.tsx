@@ -35,6 +35,5 @@ export function draw(p: p5Types) {
 export function mouseClicked(p: p5Types) {
   t = 0
   size *= 2 / 3
-  console.log(size)
   if (size < 5) size = Math.min(p.height, p.width) / 4
 }

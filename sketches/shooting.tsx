@@ -165,7 +165,6 @@ class Own {
       color: '#56a764',
     })
     this.bullets.push(bullet)
-    console.log(bullet.angle)
   }
 
   update() {
