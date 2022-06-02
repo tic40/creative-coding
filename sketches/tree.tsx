@@ -123,7 +123,7 @@ export function setup(p: p5Types, canvasParentRef: Element) {
   init(p)
 }
 
-export function draw(p: p5Types) {
+export function draw() {
   const len = lSystem.drawData.length
   let steps = 10
   if (10000 < len) steps = 500
