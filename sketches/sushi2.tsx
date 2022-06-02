@@ -1,6 +1,6 @@
 import p5Types from 'p5'
 
-const IMAGE_PATH = '../sushi/sushi_oke_nigiri.png'
+const IMAGE_PATH = `${process.env.basePath}/sushi/sushi_oke_nigiri.png`
 let img: p5Types.Image
 
 export function setup(p: p5Types, canvasParentRef: Element) {
