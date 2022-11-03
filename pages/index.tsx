@@ -16,17 +16,18 @@ const Home: NextPage = () => {
       <main className="m-4">
         <h1 className="text-4xl">
           <Link href="/">
-            <a>{process.env.siteName}</a>
+            {process.env.siteName}
           </Link>
         </h1>
         <div className="my-5 flex-wrap flex gap-4">
           {sketchFileNames.map((name: string) => {
             return (
               <div key={`sketch-${name}`}>
-                <Link href={`/sketches/${name}`}>
-                  <a className="bg-transparent text-blue-700 py-1 px-3 border border-blue-500 rounded">
-                    {name}
-                  </a>
+                <Link
+                  href={`/sketches/${name}`}
+                  className="bg-transparent text-blue-700 py-1 px-3 border border-blue-500 rounded"
+                >
+                  {name}
                 </Link>
               </div>
             )
