@@ -15,9 +15,7 @@ const Home: NextPage = () => {
       />
       <main className="m-4">
         <h1 className="text-4xl">
-          <Link href="/">
-            {process.env.siteName}
-          </Link>
+          <Link href="/">{process.env.siteName}</Link>
         </h1>
         <div className="my-5 flex-wrap flex gap-4">
           {sketchFileNames.map((name: string) => {
