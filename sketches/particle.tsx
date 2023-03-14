@@ -23,8 +23,8 @@ interface Particle {
   r: number
   angle: number
   sw: number
-  type: typeof types[number]
-  color: typeof colors[number]
+  type: (typeof types)[number]
+  color: (typeof colors)[number]
 }
 let particles: Particle[]
 let rparticles: Particle[]
