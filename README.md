@@ -1,6 +1,6 @@
 # creative-coding
 
-- [WEB](https://tic40.github.io/creative-coding)
+- [https://tic40.github.io/creative-coding](https://tic40.github.io/creative-coding)
 
 ## Getting Started
 
