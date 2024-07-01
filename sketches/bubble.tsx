@@ -2,8 +2,9 @@ import p5Types from 'p5'
 
 let circles: { x: number; y: number; size: number }[]
 export function setup(p: p5Types, canvasParentRef: Element) {
-  circles = []
   p.createCanvas(p.windowWidth, p.windowHeight).parent(canvasParentRef)
+  circles = []
+  p.noFill();
 }
 
 export function draw(p: p5Types) {

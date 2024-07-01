@@ -1,7 +1,7 @@
 const SKETCH_SORT_ORDER = [
   'growing_circles',
-  'circle3',
-  'bubble1',
+  'spring',
+  'bubble',
   'bubble2',
   'sushi1',
   'sushi2',
