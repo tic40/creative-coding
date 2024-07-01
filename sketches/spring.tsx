@@ -6,8 +6,8 @@ interface Circle {
   r: number
 }
 
-const n = 100
-const speed = 4
+const N = 100
+const SPD = 4
 let circles: Circle[]
 
 export function setup(p: p5Types, canvasParentRef: Element) {
@@ -15,8 +15,8 @@ export function setup(p: p5Types, canvasParentRef: Element) {
   p.noFill()
   p.stroke(100)
 
-  const w = p.width / n
-  circles = Array.from(new Array(n)).map((_, i) => ({
+  const w = p.width / N
+  circles = Array.from(new Array(N)).map((_, i) => ({
     x: p.width / 2,
     y: p.height / 2,
     r: i * w,
@@ -26,13 +26,8 @@ export function setup(p: p5Types, canvasParentRef: Element) {
 export function draw(p: p5Types) {
   p.clear()
   circles.forEach((circle, i) => {
-    if (i === 0) {
-      circle.y += (p.mouseY - circle.y) / speed
-      circle.x += (p.mouseX - circle.x) / speed
-    } else {
-      circle.y += (circles[i - 1].y - circle.y) / speed
-      circle.x += (circles[i - 1].x - circle.x) / speed
-    }
+    circle.y += i == 0 ? (p.mouseY - circle.y) / SPD : (circles[i - 1].y - circle.y) / SPD
+    circle.x += i == 0 ? (p.mouseX - circle.x) / SPD : (circles[i - 1].x - circle.x) / SPD
     p.ellipse(circle.x, circle.y, circle.r, circle.r / 4)
   })
 }
