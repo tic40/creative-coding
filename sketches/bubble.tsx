@@ -4,7 +4,7 @@ let circles: { x: number; y: number; size: number }[]
 export function setup(p: p5Types, canvasParentRef: Element) {
   p.createCanvas(p.windowWidth, p.windowHeight).parent(canvasParentRef)
   circles = []
-  p.noFill();
+  p.noFill()
 }
 
 export function draw(p: p5Types) {

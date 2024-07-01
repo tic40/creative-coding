@@ -26,8 +26,10 @@ export function setup(p: p5Types, canvasParentRef: Element) {
 export function draw(p: p5Types) {
   p.clear()
   circles.forEach((circle, i) => {
-    circle.y += i == 0 ? (p.mouseY - circle.y) / SPD : (circles[i - 1].y - circle.y) / SPD
-    circle.x += i == 0 ? (p.mouseX - circle.x) / SPD : (circles[i - 1].x - circle.x) / SPD
+    circle.y +=
+      i == 0 ? (p.mouseY - circle.y) / SPD : (circles[i - 1].y - circle.y) / SPD
+    circle.x +=
+      i == 0 ? (p.mouseX - circle.x) / SPD : (circles[i - 1].x - circle.x) / SPD
     p.ellipse(circle.x, circle.y, circle.r, circle.r / 4)
   })
 }

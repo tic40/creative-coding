@@ -11,7 +11,7 @@ let circles: {
 export function setup(p: p5Types, canvasParentRef: Element) {
   p.createCanvas(p.windowWidth, p.windowHeight).parent(canvasParentRef)
   circles = []
-  p.noFill();
+  p.noFill()
 }
 
 export function draw(p: p5Types) {
@@ -20,7 +20,7 @@ export function draw(p: p5Types) {
     x: p.random(p.windowWidth),
     y: p.random(p.windowHeight),
     size: p.random(10, 100),
-    vector: p.createVector(p.random(-2, 2), p.random(-2, 2))
+    vector: p.createVector(p.random(-2, 2), p.random(-2, 2)),
   })
   for (const v of circles) {
     v.x += v.vector.x
