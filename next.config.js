@@ -32,6 +32,7 @@ function getSketchFileNames() {
 const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
+  output: 'export',
   basePath: isProd ? '/creative-coding' : '',
   assetPrefix: isProd ? '/creative-coding/' : '',
   env: {
