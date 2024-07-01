@@ -56,7 +56,6 @@ class LSystem {
           y = ty
           break
         default:
-          // do nothing
           break
       }
     }
@@ -90,7 +89,7 @@ function init(p: p5Types) {
   const data = {
     start: 'X',
     rules: { X: '+YF-XFX-FY+', Y: '-XF+YFY+FX-' },
-    length: 5,
+    length: Math.min(p.windowWidth, p.windowHeight) / 70,
     depth: 6,
     x: 10,
     y: 10,
@@ -112,10 +111,7 @@ export function draw(p: p5Types) {
   p.noFill()
 
   const len = lSystem.drawData.length
-  let steps = 10
-  if (5000 < len) steps = 50
-  else if (1000 < len) steps = 25
-  lSystem.draw(steps)
+  lSystem.draw(10)
 }
 
 export function mouseClicked(p: p5Types) {

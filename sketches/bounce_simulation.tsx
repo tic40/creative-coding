@@ -6,28 +6,12 @@ let balls: Ball[]
 let gp: p5Types
 let bottomY: number
 
-const colors = [
-  '#de9610',
-  '#c93a40',
-  '#d06d8c',
-  '#fff001',
-  '#65ace4',
-  '#a0c238',
-  '#56a764',
-  '#d16b16',
-  '#0074bf',
-  '#9460a0',
-  '#cc528b',
-  '#f2cf01',
-] as const
-
 class Ball {
   x: number
   y: number
   vx: number
   vy: number
   r: number
-  color: string
 
   constructor(params: {
     x: number
@@ -35,14 +19,12 @@ class Ball {
     vx: number
     vy: number
     r: number
-    color: string
   }) {
     this.x = params.x
     this.y = params.y
     this.vx = params.vx
     this.vy = params.vy
     this.r = params.r
-    this.color = params.color
   }
 
   update() {
@@ -70,7 +52,7 @@ class Ball {
   }
 
   draw() {
-    gp.fill(this.color)
+    gp.fill(50)
     gp.circle(this.x, this.y, this.r * 2)
   }
 }
@@ -112,7 +94,6 @@ function init() {
       vx: gp.random(-3, 3),
       vy: gp.random(0.1, 5),
       r: gp.random([6, 8, 10, 12, 14, 16, 18]),
-      color: gp.random([...colors]),
     })
     balls.push(ball)
   }
