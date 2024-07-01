@@ -18,6 +18,7 @@ const SKETCH_SORT_ORDER = [
   'peano_curve',
   'koch_curve',
   'sierpinski_gasket',
+  'sierpinski_carpet',
   'tree',
 ]
 
