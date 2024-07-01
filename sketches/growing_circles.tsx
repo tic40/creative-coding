@@ -9,7 +9,7 @@ export function setup(p: p5Types, canvasParentRef: Element) {
 export function draw(p: p5Types) {
   p.clear()
   circles.push({ x: p.mouseX, y: p.mouseY, size: 10 })
-  circles = circles.slice(-500)
+  circles = circles.slice(-1000)
   for (const v of circles) v.size += 0.5
   for (const v of circles) p.circle(v.x, v.y, v.size)
 }

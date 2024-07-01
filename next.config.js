@@ -1,5 +1,5 @@
 const SKETCH_SORT_ORDER = [
-  'circle1',
+  'growing_circles',
   'circle2',
   'circle3',
   'bubble1',
