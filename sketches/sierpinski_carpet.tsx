@@ -31,17 +31,18 @@ export function setup(p: p5Types, canvasParentRef: Element) {
 
 export function draw(p: p5Types) {
   p.noStroke()
-  p.noFill()
-  for (let i = 0; i < 40; i++) {
+  p.fill(0)
+  for (let i = 0; i < 30; i++) {
     if (Math.floor(t / data.length) >= data.length) return
     const now = data[Math.floor(t / data.length)][t % data.length]
-    now == '#' ? p.fill(0) : p.noFill()
-    p.rect(
-      (t % data.length) * size,
-      Math.floor(t / data.length) * size,
-      size,
-      size
-    )
+    if (now == '#') {
+      p.rect(
+        (t % data.length) * size,
+        Math.floor(t / data.length) * size,
+        size,
+        size
+      )
+    }
     t++
   }
 }
