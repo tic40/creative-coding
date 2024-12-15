@@ -13,9 +13,9 @@ const Random: NextPage = () => {
   const names: string[] = publicRuntimeConfig.sketchFileNames
   const name = names[Math.floor(Math.random() * names.length)]
 
-  /* eslint-disable @typescript-eslint/no-var-requires */
+  /* eslint-disable @typescript-eslint/no-require-imports */
   const sketch = require(`../sketches/${name}`)
-  /* eslint-enable @typescript-eslint/no-var-requires */
+  /* eslint-enable @typescript-eslint/no-require-imports */
   return (
     <>
       <Meta

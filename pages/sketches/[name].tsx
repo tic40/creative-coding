@@ -14,9 +14,9 @@ const ReactP5 = dynamic(() => import('react-p5'), {
 })
 
 const Name: NextPage<Props> = ({ name }) => {
-  /* eslint-disable @typescript-eslint/no-var-requires */
+  /* eslint-disable @typescript-eslint/no-require-imports */
   const sketch = require(`../../sketches/${name}`)
-  /* eslint-enable @typescript-eslint/no-var-requires */
+  /* eslint-enable @typescript-eslint/no-require-imports */
   return (
     <>
       <Meta
